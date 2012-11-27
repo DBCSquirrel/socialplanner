@@ -1,0 +1,6 @@
+- Add status to events (pending, approved once headcount reached, no headcount required = default approved)
+- Invites (initial & for events)--> process
+-Logic to only allow events past current time
+-^validations in general (admin can only host one at once)
+-min/max instead of just headcount (implications on event status)
+-
