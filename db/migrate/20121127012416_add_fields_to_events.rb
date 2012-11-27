@@ -6,10 +6,7 @@ class AddFieldsToEvents < ActiveRecord::Migration
     add_column :events, :start_datetime, :datetime
     add_column :events, :end_datetime, :datetime
     add_column :events, :location, :string
-    add_column :events, :headcount_required, :boolean
-    add_column :events, :headcount, :integer
-
+    add_column :events, :headcount_min, :integer, :default => 1
+    add_column :events, :headcount_max, :integer, :default => 0
   end
 end
-
-# :name, :description, :admin, :start_datetime, :end_datetime, :location, :headcount_required, :headcount, :attendees_list

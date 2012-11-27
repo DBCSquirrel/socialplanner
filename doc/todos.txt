@@ -3,4 +3,7 @@
 -Logic to only allow events past current time
 -^validations in general (admin can only host one at once)
 -min/max instead of just headcount (implications on event status)
--
+-admin/event created automatically added to attendees list upon event creation
+-ranking/suggestion algorithm
+
+-we have established the need for not only an attendees list, but the list of people invited
