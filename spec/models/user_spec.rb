@@ -3,44 +3,48 @@ require 'spec_helper'
 describe User do
 	let(:user) { build(:user) } 
 
-	context "validations" do
-
+	context "initialization" do
 		it "should have a name" do
-			user.name?.should == true
-		end
-
-		it "should have a unique name" do
-			user.name.unique?.should == true
+			user.name = ""
+      user.save.should be_false
+      user.errors.full_messages.should include("Name can't be blank")  
 		end
 
 		it "has an oauth_token" do
-  		user.oauth_token?.should == true
-  	end
+  		user.oauth_token = ""
+      user.save.should be_false
+      user.errors.full_messages.should include("Oauth token can't be blank")
+    end
 
-  	it "has a unique oauth_token" do
-  		user.oauth_token.unique?.should == true
-  	end
+    it "should have a properly formatted oauth_token"
 
   	it "has a facebook uid" do
-  		user.uid?.should == true
+      user.uid = ""
+      user.save.should be_false
+      user.errors.full_messages.should include("Uid can't be blank")
   	end
+
+    it "should have a numerical facebook uid" do
+      user.uid = "I ran over a homeless man"
+      user.save.should be_false
+      user.errors.full_messages.should include("Uid is not a number")
+    end
+
 
   	it "has a unique facebook uid" do
-  		user.uid.unique?.should == true
+  	  user2 = create(:user)
+      user.save.should be_false
+      user.errors.full_messages.should include("Uid has already been taken")
   	end
 
-  	it "has a provider of facebook" do
-  		user.uid.unique?.should == true
+  	it "has a provider called 'facebook'" do
+  		user.provider = 'facebookish'
+      user.save.should be_false
+      user.errors.full_messages.should include("Provider is invalid")
   	end
+
 	end	
 
-  context "create facebook user" do
-  	it "adds a new user object to the database" do
-  		before_save = user.all.length
-  		after_save  = user.all.length + 1
-  		after_save.should == user.all.length + 1
-  	end
-  end
 end
 
 # class User < ActiveRecord::Base
@@ -64,4 +68,3 @@ end
 #   	@facebook ||= Koala::Facebook::API.new(oauth_token)
 #   end
 # end
-# 		
