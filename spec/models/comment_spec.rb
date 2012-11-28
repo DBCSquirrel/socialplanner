@@ -24,5 +24,17 @@ describe Comment do
       comment.save.should be_false
       comment.errors.full_messages.should include("Commentable type can't be blank")
     end
+
+    it "should have a properly formatted commentable type" do
+      comment.commentable_type = "Commenta"
+      comment.save.should be_false
+      comment.errors.full_messages.should include("Commentable type must be 'Comment' or 'Event'")
+    end
+
+    it "should have a numeric commentable ID" do
+      comment.commentable_id = "34sdf"
+      comment.save.should be_false
+      comment.errors.full_messages.should include("Commentable is not a number")
+    end
   end
 end
