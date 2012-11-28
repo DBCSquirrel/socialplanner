@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :oauth_expires_at, :oauth_token, :provider, :uid
 
-  has_many :created_events, :classname => "Event"
+  has_many :created_events, :class_name => "Event"
 
   # validates presence
   # validates uniqueness

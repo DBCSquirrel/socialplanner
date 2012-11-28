@@ -9,6 +9,6 @@ class Event < ActiveRecord::Base
   validates :headcount_min, :presence => true
   validates :headcount_max, :presence => true
 
-  belongs_to :creator, :classname => "User"
+  belongs_to :creator, :class_name => "User"
 
 end
