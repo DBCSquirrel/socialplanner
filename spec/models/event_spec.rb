@@ -62,7 +62,7 @@ describe Event do
   end
 
   context "event is activated" do #Activated events are those that have met their minimum headcount and thus are going to happen.
-    it "by default, will be activated" do
+    xit "by default, will be activated" do
       #event.headcount_max.should eq(0)
       event.headcount_max == attendees_list.headcount
     end
@@ -78,4 +78,12 @@ describe Event do
       event.headcount_max.should eq(0)
     end
   end
+
+  context "event has comments"
+
+  context "attempting to create event when user already has an event during the same time"
+
+  context "event has attendees list"
+
+  context "event has invitees list"
 end

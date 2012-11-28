@@ -7,3 +7,6 @@
 -ranking/suggestion algorithm
 
 -we have established the need for not only an attendees list, but the list of people invited
+
+Viewing event logic:
+-only see an event that you have been invited to AND are friends with (controller logic)

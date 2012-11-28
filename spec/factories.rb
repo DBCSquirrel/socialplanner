@@ -1,11 +1,15 @@
+require 'faker'
+
+start_time = Time.now + 86400 + rand(86400)
+
 FactoryGirl.define do
-  factory :event do
-    name 'The Wine Gala for Whistling Willie'
-    description 'this is a description about'
-    admin_id 1
-    start_datetime '2012-12-12 10:15:00 -0800'
-    end_datetime '2012-12-12 12:15:00 -0800'
-    location 'DBC, yo'
+  factory :event do |f|
+    f.name { Faker::Lorem.words }
+    f.description { Faker::Lorem.paragraph }
+    f.admin_id { rand(10) }
+    f.start_datetime { start_time }
+    f.end_datetime { start_time + 3600 }
+    f.location { Faker::Lorem.words }
   end
 
 end
