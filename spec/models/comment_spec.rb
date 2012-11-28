@@ -32,7 +32,7 @@ describe Comment do
     end
 
     it "should have a numeric commentable ID" do
-      comment.commentable_id = "34sdf"
+      comment.commentable_id = "34asdf"
       comment.save.should be_false
       comment.errors.full_messages.should include("Commentable is not a number")
     end

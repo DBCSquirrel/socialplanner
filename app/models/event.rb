@@ -8,4 +8,7 @@ class Event < ActiveRecord::Base
   validates :location, :presence => true
   validates :headcount_min, :presence => true
   validates :headcount_max, :presence => true
+
+  belongs_to :creator, :classname => "User"
+
 end
