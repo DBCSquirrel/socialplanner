@@ -20,13 +20,22 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+
 
 group :development, :test do
   gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
   gem 'capybara'
+  gem 'sqlite3'
+end
+
+gem 'omniauth-facebook', '1.4.0' # version 1.4.1 seems to break with the current version of the Facebook SDK
+gem 'koala'
+gem 'jquery-rails'
+
+group :production do
+  gem 'pg'
 end
 
 # To use ActiveModel has_secure_password
