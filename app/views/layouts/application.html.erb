@@ -1,41 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Mouse+Memoirs' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Mouse+Memoirs' rel='stylesheet' type='text/css'>
   <title>Squirrly</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "http://mbostock.github.com/d3/d3.v2.js", "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="header">
-    <h1 id="title">Squirrly</h1>
+  <div class="header">
+    <h1>Squirrly</h1>
+    <div class="nav">
+        <% if current_user %>
+           Welcome, <strong><%= current_user.name %></strong> &middot;
+          <%= link_to "Log out", signout_path %>
+        <% else %>
+          <%= link_to "Log in", "/auth/facebook" %>
+        <% end %>
 
-    <div class="tabs">
-      <ul>
-        <li class="current"><a href="#sunday">Sunday</a></li>
-        <li><a href="#monday">Monday</a></li>
-        <li><a href="#tuesday">Tuesday</a></li>
-        <li><a href="#wednesday">Wednesday</a></li>
-        <li><a href="#thursday">Thursday</a></li>
-        <li><a href="#friday">Friday</a></li>
-        <li><a href="#saturday">Saturday</a></li>
-      </ul>
-    </div>
-
-		<div id="auth">
-			  <% if current_user %>
-			     Welcome, <strong><%= current_user.name %></strong><br />
-			    <%= link_to "Log out", signout_path %>
-			  <% else %>
-			    <%= link_to "Log in", "/auth/facebook" %>
-			  <% end %>
-
-			<% flash.each do |name, msg| %>
-				<%= content_tag :div, msg, id: "flash_#{name}" %>
-			<% end %>
-		</div> <!-- #log_in -->
-	</div>   <!-- #header -->
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+    </div> <!-- #log_in -->
+  </div>   <!-- #header -->
 
 <%= yield %>
 
