@@ -11,3 +11,33 @@
  *= require_self
  *= require_tree .
  */
+
+a {
+	outline: 0;
+}
+a:link, a:visited {
+	color: #03406A;
+	text-decoration: none;
+}
+a:hover {
+	color: #0A64A4;
+}
+body {
+	width: 860px;
+	margin: 0 auto;
+	color: #BF8130;
+	background-color: #FFC273;
+}
+#auth {
+	float: right;
+	padding: 10px;
+	font: 14px verdana;
+	text-align: right;
+	text-decoration: none;
+}
+#title {
+	font: 50px 'Mouse Memoirs', sans-serif;
+	color: #BF8130;
+	margin: 20px 0px;
+}
+
