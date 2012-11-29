@@ -9,9 +9,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="header">
-    <h1 id="title">Squirrly</h1>
-    <div id="auth">
+  <div class="header">
+    <h1>Squirrly</h1>
+    <div class="nav">
         <% if current_user %>
            Welcome, <strong><%= current_user.name %></strong> &middot;
           <%= link_to "Log out", signout_path %>
@@ -22,8 +22,8 @@
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
-    </div> <!-- # auth -->
-  </div>   <!-- # header -->
+    </div> <!-- #log_in -->
+  </div>   <!-- #header -->
 
 <%= yield %>
 
