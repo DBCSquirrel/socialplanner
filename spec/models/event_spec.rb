@@ -8,6 +8,7 @@ describe Event do
     [:name, :description, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :creator_id].each do |attribute|
       it {should respond_to attribute}
     end
+    it { should validate_presence_of(:name) }
 
     context "validations" do
       it "should have a name" do
@@ -59,9 +60,9 @@ describe Event do
       end
 
   end
-  context "adding guests to event" do
-    it "should initially have an association with guests" do
-      event.should respond_to(:guests)
+  context "adding invited_guests to event" do
+    it "should initially have an association with invited_guests" do
+      event.should respond_to(:invited_guests)
     end
   end
 
@@ -93,6 +94,19 @@ describe Event do
       # check for user_id in db?
     end
   end
+
+  describe ".attending_guests" do
+    it "returns a list of guests marked as attending" do
+      event.save!
+      user1 = create(:user)
+      user2 = create(:user)
+      event.invited_guests << user1
+      event.invited_guests << user2
+      event.event_users.find_by_user_id(user1.id).update_attributes(:accepted => true)
+      event.attending_guests.should == [user1]
+    end
+  end
+
   context "event has comments"
 
   context "attempting to create event when user already has an event during the same time"

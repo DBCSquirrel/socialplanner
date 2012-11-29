@@ -33,7 +33,8 @@ describe User do
     end
 
     it "has a unique facebook uid" do
-      user2 = create(:user)
+      user.uid = "555"
+      user2 = create(:user, :uid => "555")
       user.save.should be_false
       user.errors.full_messages.should include("Uid has already been taken")
     end
@@ -57,9 +58,32 @@ describe User do
     end
   end
 
-  context "received invites" do
-    it "user is associated with respective events" do
-      user.should respond_to(:guest_invitations)
+  describe '#guest_invitations' do
+    it "returns a list of events the user has been invited to" do
+      user.save!
+      event = create(:event)
+      event.invited_guests << user
+      user.guest_invitations.should == [event]
+    end
+
+    it "by default, guest has not accepted event invitation" do
+      user.save!
+      event = create(:event)
+      event.invited_guests << user
+      not_yet_accepted = event.invited_guests.joins(:event_users).where("event_users.accepted" => false)
+      not_yet_accepted.last.should eq(user)
+    end
+
+    it "automatically sets the event creator as attending"
+  end
+  
+  describe ".attending" do
+    it "returns a list of events that user has accepted invitations to" do
+      user.save!
+      event = create(:event)
+      event.invited_guests << user
+      event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
+      user.attending.last.should eq(event)
     end
   end
 end

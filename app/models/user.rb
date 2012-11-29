@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   has_many :event_users
   has_many :guest_invitations, :through => :event_users, :source => :event
 
+  def attending
+    guest_invitations.joins(:event_users).where("event_users.accepted" => true)
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider

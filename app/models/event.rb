@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-   attr_accessible :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max
+  attr_accessible :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max
   validates :name, :presence => true
   validates :description, :presence => true
   validates :creator_id, :presence => true
@@ -12,5 +12,9 @@ class Event < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
 
   has_many :event_users
-  has_many :guests, :through => :event_users, :source => :user
+  has_many :invited_guests, :through => :event_users, :source => :user
+
+  def attending_guests
+    invited_guests.joins(:event_users).where("event_users.accepted" => true)
+  end
 end

@@ -20,3 +20,7 @@ Finish events testing..
   -event.user.confirmed_at
 
 Migrations
+
+
+
+-setup headcount min and max to allow a null value in database, set business logic to enforce minimum or maximum headcount ONLY if there is a min or max headcount present
