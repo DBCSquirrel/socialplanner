@@ -10,3 +10,13 @@
 
 Viewing event logic:
 -only see an event that you have been invited to AND are friends with (controller logic)
+
+
+
+Finish events testing..
+  -event should respond_to event.alias(es)
+  -events_invitations
+  -events_users
+  -event.user.confirmed_at
+
+Migrations

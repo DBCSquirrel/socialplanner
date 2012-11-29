@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe Event do
   let(:event) { build(:event) }
+  let(:user) { build(:user) }
   context "#initialization" do
 
-    [:name, :description, :admin_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max].each do |attribute|
+    [:name, :description, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :creator_id].each do |attribute|
       it {should respond_to attribute}
     end
-
-    it "should have a has_many_and_belongs_to relationship with users"
 
     context "validations" do
       it "should have a name" do
@@ -23,10 +22,10 @@ describe Event do
         event.errors.full_messages.should include("Description can't be blank")
       end
 
-      it "should have an admin_id" do
-        event.admin_id = nil
+      it "should have an creator" do
+        event.creator_id = nil
         event.save.should be_false
-        event.errors.full_messages.should include("Admin can't be blank")
+        event.errors.full_messages.should include("Creator can't be blank")
       end
 
       it "should have an start date and time" do
@@ -60,6 +59,16 @@ describe Event do
       end
 
   end
+  context "adding guests to event" do
+    it "should initially have an association with guests" do
+      event.should respond_to(:guests)
+    end
+  end
+
+  it "should have a creator" do
+    event.creator = user
+    event.creator.should eq( user )
+  end
 
   context "event is activated" do #Activated events are those that have met their minimum headcount and thus are going to happen.
     xit "by default, will be activated" do
@@ -68,7 +77,7 @@ describe Event do
     end
 
     xit "should be activated when minimum headcount is met" do
-      event.headcount_min = 6
+
     end
 
   end
@@ -79,11 +88,46 @@ describe Event do
     end
   end
 
+  context "user accepts invite to event" do
+    xit "should add user to attendees list" do
+      # check for user_id in db?
+    end
+  end
   context "event has comments"
 
   context "attempting to create event when user already has an event during the same time"
+
+  context "event has attendees list with no headcount requirement"
 
   context "event has attendees list"
 
   context "event has invitees list"
 end
+
+# -event should respond_to event.alias(es)
+# -events_invitations
+# -events_users
+# -event.user.confirmed_at
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
