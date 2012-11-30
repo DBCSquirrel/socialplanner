@@ -44,25 +44,40 @@ $(document).ready(function() {
     .attr('height', miniHeight)
     .attr('class', 'mini');
 
-  // draw the lanes for the main chart
-  main.append('g').selectAll('.laneLines')
-    .data(lanes)
-    .enter().append('line')
-    .attr('x1', 0)
-    .attr('y1', function(d) { return d3.round(y1(d.id)) + 0.5; })
-    .attr('x2', width)
-    .attr('y2', function(d) { return d3.round(y1(d.id)) + 0.5; })
-    .attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
 
-  main.append('g').selectAll('.laneText')
-    .data(lanes)
-    .enter().append('text')
-    .text(function(d) { return d.label; })
-    .attr('x', -10)
-    .attr('y', function(d) { return y1(d.id + .5); })
-    .attr('dy', '0.5ex')
-    .attr('text-anchor', 'end')
-    .attr('class', 'laneText');
+
+
+
+
+                        // draw the lanes for the main chart
+                        main.append('g').selectAll('.laneLines')
+                          .data(lanes)
+                          .enter().append('line')
+                          .attr('x1', 0)
+                          .attr('y1', function(d) { return d3.round(y1(d.id)) + 0.5; })
+                          .attr('x2', width)
+                          .attr('y2', function(d) { return d3.round(y1(d.id)) + 0.5; })
+                          .attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
+
+
+
+
+
+
+                        main.append('g').selectAll('.laneText')
+                          .data(lanes)
+                          .enter().append('text')
+                          .text(function(d) { return d.label; })
+                          .attr('x', -10)
+                          .attr('y', function(d) { return y1(d.id + .5); })
+                          .attr('dy', '0.5ex')
+                          .attr('text-anchor', 'end')
+                          .attr('class', 'laneText');
+
+
+
+
+
 
   // draw the lanes for the mini chart
   mini.append('g').selectAll('.laneLines')
@@ -89,28 +104,28 @@ $(document).ready(function() {
     .scale(x)
     .orient('bottom')
     .ticks(d3.time.mondays, (x.domain()[1] - x.domain()[0]) > 15552e6 ? 2 : 1)
-    .tickFormat(d3.time.format('%d'))
+    .tickFormat(d3.time.format('%d')) // date of month (i.e., 11, 29, etc.)
     .tickSize(6, 0, 0);
 
   var x1DateAxis = d3.svg.axis()
     .scale(x1)
     .orient('bottom')
     .ticks(d3.time.days, 1)
-    .tickFormat(d3.time.format('%a %d'))
+    .tickFormat(d3.time.format('%a %d')) // abbrev. day of week, date of month (i.e., 11, 29, etc.)
     .tickSize(6, 0, 0);
 
   var xMonthAxis = d3.svg.axis()
     .scale(x)
     .orient('top')
     .ticks(d3.time.months, 1)
-    .tickFormat(d3.time.format('%b %Y'))
+    .tickFormat(d3.time.format('%b %Y')) // abbrev. month name and year
     .tickSize(15, 0, 0);
 
   var x1MonthAxis = d3.svg.axis()
     .scale(x1)
     .orient('top')
     .ticks(d3.time.mondays, 1)
-    .tickFormat(d3.time.format('%b - Week %W'))
+    .tickFormat(d3.time.format('%h')) // %b - Week %W | %b is abbrev. month name; %W is incrementing number w/ leading zero 
     .tickSize(15, 0, 0);
 
   main.append('g')
@@ -153,7 +168,7 @@ $(document).ready(function() {
     .attr('y2', miniHeight)
     .attr('class', 'todayLine');
 
-  // draw the items
+  // draw the items | a.k.a. EVENTS (in our case)
   var itemRects = main.append('g')
     .attr('clip-path', 'url(#clip)');
 
@@ -200,15 +215,15 @@ $(document).ready(function() {
 
     if ((maxExtent - minExtent) > 1468800000) {
       x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
-      x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
+      x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%I %p')) // --
     }
     else if ((maxExtent - minExtent) > 172800000) {
       x1DateAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%a %d'))
-      x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
+      x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%I %p')) // --
     }
     else {
-      x1DateAxis.ticks(d3.time.hours, 4).tickFormat(d3.time.format('%I %p'))
-      x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e'))
+      x1DateAxis.ticks(d3.time.hours, 4).tickFormat(d3.time.format('%I %p')) // %I hour (12-hour clock) %p is AM/PM
+      x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e')) // %e is date of month
     }
 
 

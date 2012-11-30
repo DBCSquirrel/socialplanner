@@ -1,6 +1,8 @@
 .chart {
   shape-rendering: crispEdges;
-
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 860px;
 }
 
 .mini text {
@@ -34,8 +36,8 @@
 }
 
 .past {
-  stroke: green;
-  fill: lightgreen;
+  stroke: #777;
+  fill: lightblue;
 }
 
 .brush .extent {

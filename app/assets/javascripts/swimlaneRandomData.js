@@ -109,7 +109,7 @@
 					var workItem = {
 						id: i * totalWorkItems + j,
 						name: 'work item ' + j,
-						lane: 'lane ' + i,
+						lane: 'drewie! ' + i,
 						start: dtS,
 						end: dt,
 						desc: 'This is a description.'

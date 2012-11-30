@@ -1,7 +1,11 @@
-* { margin: 0; padding: 0; }
-html { color: black; }
+* { 
+  margin: 0;
+  padding: 0;
+}
 
-div.header {}
+html {
+  color: black;
+}
 
 div.header h1 {
   float: left;
