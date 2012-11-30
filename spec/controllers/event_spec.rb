@@ -61,17 +61,49 @@ describe EventsController do
   end
 
   describe "#edit" do
-    it "provides a @event variable"
+    before do
+      @event = Event.create(valid_attributes)
+    end
 
+    it "renders the edit form" do
+      get(:edit, { :id => @event.id}).should render_template('edit')
+    end
   end
 
   describe "#update" do
+    #need to have event established on test database FIRST before attempting to update
+    # before do
+    #   @event = Event.create(valid_attributes)
+    # end
 
-    context "saves"
+    context "with valid parameters"
 
+      it "saves the updated event to the database" do
+        event.save!
+        put(:update, { :id => event.id, :event => { :location => "San Francisco" } })
+
+        # event.location.should eq "San Francisco"
+      end
+
+      it "redirects to event_path after saving" do
+        event.save!
+        put(:update, { :id => event.id, :event => { :location => "San Francisco" } }).should redirect_to event_path
+      end
+
+    context "with invalid parameters"
+      it "renders the edit form" do
+        event.save!
+        put(:update, { :id => event.id, :event => { :name => "" } }).should render_template('edit')
+      end
   end
 
   describe "deleting existing event" do
 
+    it "should remove a record from the database" do
+      event.save!
+      expect do
+        delete :destroy, { :id => event.id }
+      end.to change{ Event.count }.by(-1)
+    end
   end
 end
