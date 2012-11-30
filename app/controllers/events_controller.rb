@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     if @event.destroy
       redirect_to events_path
     else
-      render(:text => 'what happened?')
+      render(:text => 'Sorry, your event was not successfully deleted. Please try again.')
     end
   end
 end

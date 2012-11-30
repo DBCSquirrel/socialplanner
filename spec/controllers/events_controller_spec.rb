@@ -5,7 +5,7 @@ describe EventsController do
   let(:event) { build(:event) }
 
   let(:valid_attributes) do
-    FactoryGirl.build(:event).attributes.delete_if { |k,v| k == 'id' || k == 'created_at' || k == 'updated_at' }
+    build(:event).attributes.delete_if { |k,v| k == 'id' || k == 'created_at' || k == 'updated_at' }
   end
 
   describe '#new' do
