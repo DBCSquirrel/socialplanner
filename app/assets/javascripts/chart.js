@@ -1,7 +1,7 @@
 $(document).ready( function() {
-  $('.remove_sched').click( function() {
-    alert("clicked?");
-      $(this).preventDefault();
-      $(this).parent().remove();
+  $('#chart').delegate( ".remove_sched", "click", function(e) {
+    //confirm("clicked?");
+      e.preventDefault();
+      $(this).parent().slideUp('fast', function(){$(this).remove()});
   });
 });
