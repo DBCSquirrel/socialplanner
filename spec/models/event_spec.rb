@@ -17,12 +17,6 @@ describe Event do
         event.errors.full_messages.should include("Name can't be blank")
       end
 
-      it "should have a description" do
-        event.description = ""
-        event.save.should be_false
-        event.errors.full_messages.should include("Description can't be blank")
-      end
-
       it "should have an creator" do
         event.creator_id = nil
         event.save.should be_false
@@ -40,24 +34,7 @@ describe Event do
         event.save.should be_false
         event.errors.full_messages.should include("End datetime can't be blank")
       end
-
-      it "should have a location" do
-        event.location = ''
-        event.save.should be_false
-        event.errors.full_messages.should include("Location can't be blank")
-      end
-
-      it "should have a headcount min" do
-        event.headcount_min = nil
-        event.save.should be_false
-        event.errors.full_messages.should include("Headcount min can't be blank")
-      end
-
-      it "should have a headcount max" do
-        event.headcount_max = nil
-        event.save.should be_false
-        event.errors.full_messages.should include("Headcount max can't be blank")
-      end
+    end
 
   end
   context "adding invited_guests to event" do
@@ -83,12 +60,6 @@ describe Event do
 
   end
 
-  context "event is full"
-    it "by default, should have no max" do
-      event.headcount_max.should eq(0)
-    end
-  end
-
   context "user accepts invite to event" do
     xit "should add user to attendees list" do
       # check for user_id in db?
@@ -107,41 +78,9 @@ describe Event do
     end
   end
 
-  context "event has comments"
-
-  context "attempting to create event when user already has an event during the same time"
-
-  context "event has attendees list with no headcount requirement"
-
-  context "event has attendees list"
-
-  context "event has invitees list"
 end
 
 # -event should respond_to event.alias(es)
 # -events_invitations
 # -events_users
 # -event.user.confirmed_at
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

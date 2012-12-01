@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(:version => 20121129032513) do
   end
 
   create_table "events", :force => true do |t|
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "name"
     t.string   "description"
     t.datetime "start_datetime"
     t.datetime "end_datetime"
     t.string   "location"
-    t.integer  "headcount_min",  :default => 1
-    t.integer  "headcount_max",  :default => 0
+    t.integer  "headcount_min"
+    t.integer  "headcount_max"
     t.integer  "creator_id"
   end
 
