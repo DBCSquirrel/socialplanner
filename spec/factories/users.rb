@@ -6,7 +6,7 @@ FactoryGirl.define do
     provider "facebook"
     uid { generate(:uid) }
     name { Faker::name }
-    oauth_token "DASVAERGH#2345647regGDSFsdfgSERTF"
+    oauth_token "DASVAERGH2345647regGDSFsdfgSERTF"
     oauth_expires_at "2012-11-27 16:51:41"
   end
 end
