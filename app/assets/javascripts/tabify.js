@@ -1,9 +1,5 @@
 // $(function() { // same as $(document).ready(...)
-  // $('#roster tr:odd').addClass('zebra');
-
-// $(function() { // same as $(document).ready(...)
-//   // $('#roster tr:odd').addClass('zebra');
-
+// $('#roster tr:odd').addClass('zebra');
 //   $('.tabs a').click(function(e) {  // listen for click on tab alt tags
 
 //     $('.tabs li').removeClass('current'); // turn other tabs off

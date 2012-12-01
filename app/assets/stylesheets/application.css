@@ -93,17 +93,25 @@ div.nav { /* fb login/out link */
     margin: 1% 4%;
 }
 
-div.tabs ul li a:link { outline: 0; color: black; text-decoration: none; }
+/*div.tabs ul li a:link { outline: 0; color: black; text-decoration: none; }
 div.tabs ul li a:active { outline: 0; text-decoration: none; }
 div.tabs ul li a:hover { outline: 0; text-decoration: none; color: red; }
 div.tabs ul li a:visited { outline: 0; text-decoration: none; color: black; }
 
 div.tabs {
+<<<<<<< HEAD
     float: left;
     height: auto;
     width: 55%;
     /*margin-right: 8.6%;*/
     margin-top: 1%;
+=======
+    float: left;
+    height: auto;
+    width: 55%;
+    margin-right: 8.6%;
+    margin-top: 1%;
+>>>>>>> add static lane events and add lane
 }
 div.tabs ul {
     margin: 0;
@@ -126,6 +134,7 @@ div.tabs ul li.current {
 }
 
 div.day {
+<<<<<<< HEAD
     width: auto;
     background-color: yellow;
     height: 5%;
@@ -141,6 +150,23 @@ div.main_grid {
     /*border-radius: 5px 5px 5px 5px;*/
     padding: 20px;
     clear: both;
+=======
+    width: auto;
+    background-color: yellow;
+    height: 5%;
+
+}
+
+div.main_grid {
+    height: 100%;
+    width: 120%;
+
+    float: left;
+
+
+    padding: 20px;
+    clear: both;
+>>>>>>> add static lane events and add lane
 }
 
 div.main_grid td {
@@ -158,3 +184,4 @@ div.main_grid table#roster a:visited { text-decoration: none; color: black; }
     background-color: #ddd;
     color: #666;
 }
+*/
