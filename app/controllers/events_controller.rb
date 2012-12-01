@@ -3,6 +3,7 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+<<<<<<< HEAD
   def new
     @event = Event.new
   end
@@ -39,5 +40,10 @@ class EventsController < ApplicationController
       render(:text => 'Sorry, your event was not successfully deleted. Please try again.')
     end
   end
+=======
+	def index
+    @events = current_user.created_events
+	end
+>>>>>>> add functional duplicate-lane and remove-lane js functionality
 
 end
