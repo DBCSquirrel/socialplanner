@@ -76,14 +76,14 @@ describe User do
 
     it "automatically sets the event creator as attending"
   end
-  
+
   describe ".attending" do
     it "returns a list of events that user has accepted invitations to" do
       user.save!
       event = create(:event)
       event.invited_guests << user
       event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
-      user.attending.last.should eq(event)
+      user.attending_events.last.should eq(event)
     end
   end
 end

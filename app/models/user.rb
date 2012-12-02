@@ -11,8 +11,34 @@ class User < ActiveRecord::Base
   has_many :event_users
   has_many :guest_invitations, :through => :event_users, :source => :event
 
-  def attending
-    guest_invitations.joins(:event_users).where("event_users.accepted" => true)
+  def invitations
+    guest_invitations.joins(:event_users).where("event_users.accepted" => false)
+  end
+
+  def pending_events
+    events = self.guest_invitations.joins(:event_users).where("event_users.accepted" => true)
+    pending = []
+    events.each do |event|
+      if event.headcount_min = nil
+        #do nothing
+      elsif event.headcount_min > event.headcount
+        pending << event
+      end
+    end
+    pending
+  end
+
+  def attending_events
+    events = self.guest_invitations.joins(:event_users).where("event_users.accepted" => true)
+    attending = []
+    events.each do |event|
+      if event.headcount_min = nil
+        attending << event
+      elsif event.headcount_min <= event.headcount
+        attending << event
+      end
+    end
+    attending
   end
 
   def self.from_omniauth(auth)

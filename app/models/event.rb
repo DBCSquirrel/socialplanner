@@ -16,4 +16,8 @@ class Event < ActiveRecord::Base
     # check_for_tilt
   end
 
+  def headcount
+    invited_guests.joins(:event_users).where("event_users.accepted" => true).count
+  end
+
 end
