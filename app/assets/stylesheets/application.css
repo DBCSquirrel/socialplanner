@@ -18,6 +18,7 @@
 
 html {
   color: black;
+  /*background: #e1e1e1;*/
 }
 
 div.header {
@@ -39,7 +40,8 @@ a:hover {
 }
 
 body {
-  width: 860px;
+  width: 960px;
+  border-right: 1px dotted;
   margin: 0 auto;
   color: #BF8130;
   background-color: #FFFFFF; /*#FFC273;*/
@@ -54,9 +56,10 @@ body {
 }
 
 #title {
-font: 50px 'Mouse Memoirs', sans-serif;
-color: #BF8130;
-margin: 20px 0px;
+    font: 50px 'Mouse Memoirs', sans-serif;
+    color: #BF8130;
+    margin: 5px 0px;
+  /*background: yellow;*/
 }
 
 /*div.tabs ul li a:link { outline: 0; color: black; text-decoration: none; }

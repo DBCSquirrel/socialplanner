@@ -1,13 +1,11 @@
 <div class="lane">
-
-  <a class="remove_sched" href="#">Remove</a>
-
   <div class="user_info">
     <img src="http://placehold.it/40x40"><!-- FB name and photo -->
   </div>
 
-  <div class="event">
-    <p class="event_text"><%= event.name %></p>
-  </div>
+  <div class="timeline">
+    <%= render :partial => 'event', :collection => @events %>
+  </div><!--/timeline-->
 
+ <a class="remove_sched" href="#">[x]</a>
 </div>

@@ -4,7 +4,7 @@ a {
  font: 12px Verdana;
 }
 #chart {
-  width: 860px;
+  width: 840px; /* fills 100% of parent "body," width, 960px */
   margin: 0 auto;
   clear: both;
 }
@@ -16,6 +16,16 @@ a {
   border-bottom: 1px solid #555555;
 }
 
+.timeline {
+  width: 720px;
+  height: 40px;
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #f1f1f1;
+  overflow: hidden;
+}
+
 .user_info {
   padding-top: 5px;
   padding-left: 5px;
@@ -23,13 +33,14 @@ a {
 }
 
 .event {
+  position: relative;
+  display: inline-block;
   color: #222222;
-  background-color: lightblue;
-  float: left;
+  background-color: #f1f1f1; /* was #09c; */
   height: 25px;
-  line-height: 50px;
-  margin: 12.5px 10px 0 10px;
+  margin: 7.5px 0 0 0;
   border: 1px solid #09c;
+  border-left: 1px solid;
   border-radius: 3px 3px 3px 3px;
   -moz-box-shadow: 1px 1px 3px rgba(130, 130,130,0.6);
   -webkit-box-shadow: 1px 1px 3px rgba(130, 130,130,0.6);
@@ -38,11 +49,14 @@ a {
 
 .event_text {
   font: 14px verdana;
+  text-align: left;
   line-height: 25px;
   padding: 0px 5px;
 }
 
 .remove_sched {
  line-height: 50px;
+ float: right;
+ margin-right: 15px;
 }
 ​
