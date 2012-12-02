@@ -29,6 +29,9 @@ describe EventUsersController do
          event_user.reload
        end.to change{ event_user.accepted }.from(false).to(true)
      end
+     context "event has a headcount max" do
+       it "should not allow users to accept invitation if the event headcount is already at max"
+     end
    end
 
    describe '#destroy' do

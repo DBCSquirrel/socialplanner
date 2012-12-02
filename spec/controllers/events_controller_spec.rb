@@ -37,6 +37,8 @@ describe EventsController do
         end.to change{ Event.count }.by(1)
       end
 
+      it "automatically includes the event creator on the invite list as attending_event or pending_event"
+
       it "redirects to the index page" do
         post(:create, { :event => valid_attributes}).should redirect_to events_path
       end
@@ -105,5 +107,6 @@ describe EventsController do
         delete :destroy, { :id => event.id }
       end.to change{ Event.count }.by(-1)
     end
+    it "should remove all dependencies of event -> event_users"
   end
 end

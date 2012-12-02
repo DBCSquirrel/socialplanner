@@ -19,5 +19,9 @@ describe EventUser do
       event_user.save!
       event_user.accepted.should eq(false)
     end
+
+    describe 'database constraints' do
+      it 'should only have one pairing of {event_id, user_id}'
+    end
   end
 end

@@ -25,6 +25,15 @@ describe UsersController do
 
   end
 
+  describe '#invitations' do
+  end
+
+  describe '#pending_events' do
+  end
+
+  describe '#attending_events' do
+  end
+
   describe '#destroy' do
 
     it "should remove a user record from the database" do
@@ -33,6 +42,9 @@ describe UsersController do
         delete :destroy, { :id => user.id }
       end.to change{User.count}.by(-1)
     end
+
+    it "should remove all dependencies with user -> events"
+    #presume that this will in turn remove all event_users when the events are removed
   end
 
 end
