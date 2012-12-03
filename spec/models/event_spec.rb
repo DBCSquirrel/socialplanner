@@ -11,7 +11,7 @@ describe Event do
     it { should validate_presence_of(:name) }
     it { should belong_to(:creator) }
     it { should have_many(:event_users).dependent(:destroy) }
-    it { should have_many(:invited_guests).through(:event_users) }
+    it { should have_many(:guests).through(:event_users) }
     it { should have_many(:comments) }
 
     context "validations" do
@@ -41,9 +41,9 @@ describe Event do
     end
 
   end
-  context "adding invited_guests to event" do
-    it "should initially have an association with invited_guests" do
-      event.should respond_to(:invited_guests)
+  context "adding guests to event" do
+    it "should initially have an association with guests" do
+      event.should respond_to(:guests)
     end
   end
 
@@ -70,15 +70,15 @@ describe Event do
     end
   end
 
-  describe ".attending_guests" do
+  describe ".accepted_guests" do
     it "returns a list of guests marked as attending" do
       event.save!
       user1 = create(:user)
       user2 = create(:user)
-      event.invited_guests << user1
-      event.invited_guests << user2
+      event.guests << user1
+      event.guests << user2
       event.event_users.find_by_user_id(user1.id).update_attributes(:accepted => true)
-      event.attending_guests.should == [user1]
+      event.accepted_guests.should == [user1]
     end
   end
 

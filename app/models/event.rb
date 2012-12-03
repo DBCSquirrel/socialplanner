@@ -8,16 +8,20 @@ class Event < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
 
   has_many :event_users, :dependent => :destroy
-  has_many :invited_guests, :through => :event_users, :source => :user
+  has_many :guests, :through => :event_users, :source => :user
   has_many :comments, :as => :commentable
 
-  def attending_guests
-    invited_guests.joins(:event_users).where("event_users.accepted" => true)
+  def invited_guests
+    guests.joins(:event_users).where("even_users.accepted" => false)
+  end
+
+  def accepted_guests
+    guests.joins(:event_users).where("event_users.accepted" => true)
     # check_for_tilt
   end
 
   def headcount
-    invited_guests.joins(:event_users).where("event_users.accepted" => true).count
+    guests.joins(:event_users).where("event_users.accepted" => true).count
   end
 
 end
