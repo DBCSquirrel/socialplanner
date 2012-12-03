@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :creator, :class_name => "User"
 
-  has_many :event_users
+  has_many :event_users, :dependent => :destroy
   has_many :invited_guests, :through => :event_users, :source => :user
   has_many :comments, :as => :commentable
 

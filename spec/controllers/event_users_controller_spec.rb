@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe EventUsersController do
-   let(:event_user) { build(:event_user) }
+   let(:event) { create(:event, :headcount_max => 1) }
+   let(:event_user) { event.event_users.build(:user_id => 1) }
    let(:valid_attributes) { build(:event_user).attributes.delete_if { |k,v| k == 'id' || k == 'created_at' || k == 'updated_at' }}
 
    describe '#new' do
@@ -21,16 +22,24 @@ describe EventUsersController do
      end
    end
 
-   describe '#accept' do
+   describe '#update' do
      it "sets the user to accept the invite" do
        event_user.save!
        expect do
-         put :accept, { :id => event_user.id }
+         put :update, { :id => event_user.id }
          event_user.reload
        end.to change{ event_user.accepted }.from(false).to(true)
      end
      context "event has a headcount max" do
-       it "should not allow users to accept invitation if the event headcount is already at max"
+       it "should not allow users to accept invitation if the event headcount is already at max" do
+         event_user.save!
+         event.event_users.create(:user_id => 5)
+         event.reload
+         expect do
+           put :update, { :id => event_user.id }
+           #event.reload ?
+         end.to_not change{ event_user.accepted }
+       end
      end
    end
 

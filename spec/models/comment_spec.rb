@@ -7,6 +7,9 @@ describe Comment do
       it {should respond_to attribute}
     end
 
+    it { should belong_to(:commentable) }
+    it { should have_many(:comments) }
+
     it "should have a body" do
       comment.body = ''
       comment.save.should be_false

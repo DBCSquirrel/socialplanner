@@ -11,11 +11,13 @@ class EventUsersController < ApplicationController
     redirect_to root_path
   end
 
-  def accept
+  def update
     @event_user = EventUser.find_by_id(params[:id])
-    @event_user.accepted = true
-    @event_user.save
-    flash[:notice] = "Hey, you've accepted! Thanks!"
+    if @event_user.accept
+      flash[:notice] = "Hey, you've accepted! Thanks!"
+    else
+      flash[:warning] = "Sorry, but this event is full."
+    end
     redirect_to event_path(@event_user.event_id)
   end
 

@@ -107,6 +107,5 @@ describe EventsController do
         delete :destroy, { :id => event.id }
       end.to change{ Event.count }.by(-1)
     end
-    it "should remove all dependencies of event -> event_users"
   end
 end

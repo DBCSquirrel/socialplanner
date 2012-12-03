@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     events = self.guest_invitations.joins(:event_users).where("event_users.accepted" => true)
     pending = []
     events.each do |event|
-      if event.headcount_min = nil
+      if event.headcount_min == nil
         #do nothing
       elsif event.headcount_min > event.headcount
         pending << event
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     events = self.guest_invitations.joins(:event_users).where("event_users.accepted" => true)
     attending = []
     events.each do |event|
-      if event.headcount_min = nil
+      if event.headcount_min == nil
         attending << event
       elsif event.headcount_min <= event.headcount
         attending << event

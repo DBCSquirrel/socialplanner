@@ -7,4 +7,14 @@ class EventUser < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :event_id, :presence => true
 
+  def accept
+    if self.event.headcount_max
+      if self.event.headcount_max <= self.event.headcount
+        return false
+      end
+    end
+    self.accepted = true
+    self.save!
+  end
+
 end

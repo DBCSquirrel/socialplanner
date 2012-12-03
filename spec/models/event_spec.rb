@@ -9,6 +9,10 @@ describe Event do
       it {should respond_to attribute}
     end
     it { should validate_presence_of(:name) }
+    it { should belong_to(:creator) }
+    it { should have_many(:event_users).dependent(:destroy) }
+    it { should have_many(:invited_guests).through(:event_users) }
+    it { should have_many(:comments) }
 
     context "validations" do
       it "should have a name" do
