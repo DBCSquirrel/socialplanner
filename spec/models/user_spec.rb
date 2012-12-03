@@ -7,6 +7,8 @@ describe User do
   it { should have_many(:event_users).dependent(:destroy) }
   it { should have_many(:guest_invitations).through(:event_users) }
   it { should have_many(:created_events).dependent(:destroy) }
+  it { should have_many(:friendships) }
+  it { should have_many(:friends).through(:friendships) }
 
   context "initialization" do
     it "should have a name" do
@@ -19,9 +21,6 @@ describe User do
       user.oauth_token = ""
       user.save.should be_false
       user.errors.full_messages.should include("Oauth token can't be blank")
-    end
-
-    xit "should have a properly formatted oauth_token" do
     end
 
     it "has a facebook uid" do
@@ -51,11 +50,6 @@ describe User do
 
   end
 
-  context "invitation message" do
-    xit "receives message if invited to event" do
-    end
-  end
-
   describe '#guest_invitations' do
     it "returns a list of events the user has been invited to" do
       user.save!
@@ -74,8 +68,8 @@ describe User do
 
   end
 
-  describe ".attending" do
-    it "returns a list of events that user has accepted invitations to" do
+  describe '#pending_events' do
+    it "returns a list of PENDING events that user has accepted invitations to" do
       user.save!
       event = create(:event)
       event.guests << user
@@ -83,4 +77,15 @@ describe User do
       user.attending_events.last.should eq(event)
     end
   end
+
+  describe "#attending_events" do
+    it "returns a list of ACTIVE events that user has accepted invitations to" do
+      user.save!
+      event = create(:event)
+      event.guests << user
+      event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
+      user.attending_events.last.should eq(event)
+    end
+  end
+
 end

@@ -31,16 +31,15 @@ describe EventsController do
 
     context "with valid parameters" do
       it "saves a new event to the database" do
-
         expect do
           post :create, { :event => valid_attributes }
         end.to change{ Event.count }.by(1)
       end
 
       it "automatically includes the event creator as accepting their own invitation" do
-        user1 = create(:user)
-        event1 = user1.created_events.create(valid_attributes)
-        event1.accepted_guests.should include(user1)
+        post :create, { :event => valid_attributes }
+        Event.last.creator_id.should eq(EventUser.last.user_id)
+        EventUser.last.accepted.should be_true
       end
 
       it "redirects to the index page" do

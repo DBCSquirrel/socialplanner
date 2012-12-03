@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129032513) do
+ActiveRecord::Schema.define(:version => 20121203203515) do
 
   create_table "comments", :force => true do |t|
     t.string   "body"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(:version => 20121129032513) do
   end
 
   create_table "events", :force => true do |t|
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "name"
     t.string   "description"
     t.datetime "start_datetime"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20121129032513) do
     t.integer  "headcount_min"
     t.integer  "headcount_max"
     t.integer  "creator_id"
+    t.boolean  "private",        :default => false
+  end
+
+  create_table "friendships", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.integer  "friend_id"
   end
 
   create_table "users", :force => true do |t|

@@ -13,6 +13,7 @@ describe Event do
     it { should have_many(:event_users).dependent(:destroy) }
     it { should have_many(:guests).through(:event_users) }
     it { should have_many(:comments) }
+    it { should have_db_column(:private).of_type(:boolean).with_options(:default => false) }
 
     context "validations" do
       it "should have a name" do

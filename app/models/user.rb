@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :event_users, :dependent => :destroy
   has_many :guest_invitations, :through => :event_users, :source => :event
+  has_many :friendships
+  has_many :friends, :through => :friendships
 
   def invitations
     guest_invitations.joins(:event_users).where("event_users.accepted" => false)

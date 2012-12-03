@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :id, :created_at, :updated_at, :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max
+  attr_accessible :id, :created_at, :updated_at, :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :private
   validates :name, :presence => true
   validates :creator_id, :presence => true
   validates :start_datetime, :presence => true
