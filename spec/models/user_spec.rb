@@ -6,6 +6,7 @@ describe User do
 
   it { should have_many(:event_users).dependent(:destroy) }
   it { should have_many(:guest_invitations).through(:event_users) }
+  it { should have_many(:created_events).dependent(:destroy) }
 
   context "initialization" do
     it "should have a name" do
@@ -48,16 +49,10 @@ describe User do
       user.errors.full_messages.should include("Provider is invalid")
     end
 
-    it "has many events" do
-      user.created_events.should eq( [event] )
-    end
   end
 
-  context "create invite" do
-    xit "recieves an invitation if invited to event" do
-    end
-
-    xit "gets updated to attendee if accepts invitation to event" do
+  context "invitation message" do
+    xit "receives message if invited to event" do
     end
   end
 
@@ -77,7 +72,6 @@ describe User do
       not_yet_accepted.last.should eq(user)
     end
 
-    it "automatically sets the event creator as attending"
   end
 
   describe ".attending" do

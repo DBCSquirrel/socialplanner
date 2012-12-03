@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :uid, :presence => true, :uniqueness => true, :numericality => true
   validates :provider, :format => { :with => /^facebook$/}
 
-  has_many :created_events, :class_name => "Event", :foreign_key => "creator_id"
+  has_many :created_events, :class_name => "Event", :foreign_key => "creator_id", :dependent => :destroy
 
   has_many :event_users, :dependent => :destroy
   has_many :guest_invitations, :through => :event_users, :source => :event
