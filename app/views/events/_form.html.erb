@@ -1,0 +1,18 @@
+<% if @event.errors.any? %>
+  <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for(@event)  do |f| %><br />
+  <%= f.text_field :name, :placeholder => "Title" %><br />
+  <%= f.text_field :description, :placeholder => "Description" %><br />
+  <%= f.datetime_select :start_datetime %><br />
+  <%= f.datetime_select :end_datetime %><br />
+  <%= f.text_field :location, :placeholder => "Location" %><br />
+  <%= f.number_field :headcount_min, :placeholder => "Headcount minimum" %><br />
+  <%= f.number_field :headcount_max, :placeholder => "Headcount maximum" %><br />
+  <%= f.submit %><br />
+<% end %>

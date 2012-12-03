@@ -1,0 +1,22 @@
+<!-- this will be converted into a js file and rendered on-screen via ajax -->
+
+
+<tr>
+  <td><%= @event.creator_id %><br /><!-- host's name -->
+  <td>What: <%= @event.name %></td><br />
+  <td><%= @event.description %></td><br />
+  <td>When: <%= @event.start_datetime.localtime %></td><br />
+  <td>Till: <%= @event.end_datetime.localtime %></td><br />
+  <td>Where: <%= @event.location %></td><br />
+  <td><%= @event.headcount_min %></td><br />
+  <td><%= @event.headcount_max %></td>
+</tr><br />
+
+<!-- if admin - invite guests to event -->
+<!-- Who: populate invitees and confirmed guests' gravatars (attendees) -->
+
+<!--  edit option available for admin only --><%= link_to 'Edit', edit_event_path(@event) %> &nbsp; | &nbsp;
+<!-- delete option available for admin only--><%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Really delete?' } %>&nbsp; | &nbsp;
+<%= link_to 'Home', events_path %>
+
+ <!-- render polymorphic comment thread here. -->

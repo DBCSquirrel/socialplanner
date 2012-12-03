@@ -1,5 +1,5 @@
 <%= link_to "Add friend's schedule", new_lane_path, :remote => true %>
-&nbsp; | &nbsp; <a class="create_event" href="#">Add New Event</a>
+&nbsp; | &nbsp;<%= link_to("Add Event", new_event_path) %>
 <div id="chart">
 
   <%= render 'lanes/lane' %>
