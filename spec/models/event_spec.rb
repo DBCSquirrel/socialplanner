@@ -52,26 +52,31 @@ describe Event do
     event.creator.should eq( user )
   end
 
-  context "event is activated" do #Activated events are those that have met their minimum headcount and thus are going to happen.
-    xit "by default, will be activated" do
-      #event.headcount_max.should eq(0)
-      event.headcount_max == attendees_list.headcount
+  context "is activated" do #Activated events are those that have met their minimum headcount and thus are going to happen.
+    it "by default, will be activated" do
+      event.save
+      event.active?.should be_true
     end
 
-    xit "should be activated when minimum headcount is met" do
-
+    it "when minimum headcount is met" do
+      event.headcount_min = 5
+      event.save
+      4.times do |i|
+        new_user = create(:user)
+        new_user.event_users.create(:event_id => event.id).accept
+        event.reload
+        event.active?.should be_false
+      end
+      new_user = create(:user)
+      new_user.event_users.create(:event_id => event.id).accept
+      event.reload
+      event.active?.should be_true
     end
 
   end
 
-  context "user accepts invite to event" do
-    xit "should add user to attendees list" do
-      # check for user_id in db?
-    end
-  end
-
-  describe ".accepted_guests" do
-    it "returns a list of guests marked as attending" do
+  describe '#accepted_guests' do
+    it "returns a list of guests who have accepted the invitation" do
       event.save!
       user1 = create(:user)
       user2 = create(:user)

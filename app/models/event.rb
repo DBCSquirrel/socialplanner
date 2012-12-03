@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
   has_many :comments, :as => :commentable
 
   def invited_guests
-    guests.joins(:event_users).where("even_users.accepted" => false)
+    guests.joins(:event_users).where("event_users.accepted" => false)
   end
 
   def accepted_guests
@@ -22,6 +22,14 @@ class Event < ActiveRecord::Base
 
   def headcount
     guests.joins(:event_users).where("event_users.accepted" => true).count
+  end
+
+  def active?
+    if self.headcount_min == nil || self.headcount_min <= self.headcount
+      true
+    else
+      false
+    end
   end
 
 end

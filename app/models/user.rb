@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :created_events, :class_name => "Event", :foreign_key => "creator_id"
 
-  has_many :event_users
+  has_many :event_users, :dependent => :destroy
   has_many :guest_invitations, :through => :event_users, :source => :event
 
   def invitations

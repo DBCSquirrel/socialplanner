@@ -37,7 +37,11 @@ describe EventsController do
         end.to change{ Event.count }.by(1)
       end
 
-      it "automatically includes the event creator on the invite list as attending_event or pending_event"
+      it "automatically includes the event creator as accepting their own invitation" do
+        user1 = create(:user)
+        event1 = user1.created_events.create(valid_attributes)
+        event1.accepted_guests.should include(user1)
+      end
 
       it "redirects to the index page" do
         post(:create, { :event => valid_attributes}).should redirect_to events_path

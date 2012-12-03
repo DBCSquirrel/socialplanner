@@ -4,6 +4,9 @@ describe User do
   let(:user) { build(:user) }
   let(:event) { user.created_events.build }
 
+  it { should have_many(:event_users).dependent(:destroy) }
+  it { should have_many(:guest_invitations).through(:event_users) }
+
   context "initialization" do
     it "should have a name" do
       user.name = ""
@@ -62,15 +65,15 @@ describe User do
     it "returns a list of events the user has been invited to" do
       user.save!
       event = create(:event)
-      event.invited_guests << user
+      event.guests << user
       user.guest_invitations.should == [event]
     end
 
     it "by default, guest has not accepted event invitation" do
       user.save!
       event = create(:event)
-      event.invited_guests << user
-      not_yet_accepted = event.invited_guests.joins(:event_users).where("event_users.accepted" => false)
+      event.guests << user
+      not_yet_accepted = event.guests.joins(:event_users).where("event_users.accepted" => false)
       not_yet_accepted.last.should eq(user)
     end
 
@@ -81,7 +84,7 @@ describe User do
     it "returns a list of events that user has accepted invitations to" do
       user.save!
       event = create(:event)
-      event.invited_guests << user
+      event.guests << user
       event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
       user.attending_events.last.should eq(event)
     end
