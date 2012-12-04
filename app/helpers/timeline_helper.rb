@@ -5,6 +5,6 @@ module TimelineHelper
   end
 
   def event_start_position(event)
-    (event.start_datetime - (Time.now.midnight + 9.hours)) / 60
+    (event.start_datetime - (Time.now.midnight)) / 60 # + 9.hours
   end
 end
