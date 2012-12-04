@@ -1,20 +1,21 @@
 <!-- this will be converted into a js file and rendered on-screen via ajax -->
 
+<div id="event_details">
+  <tr>
+    <td><h6 class="event_labels">What:</h6> <%= @event.name %></td><br />
+    <td><h6 class="event_labels">Description: </h6><%= @event.description %></td><br />
+    <td><h6 class="event_labels">When:</h6> <%= @event.start_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></td><br />
+    <td><h6 class="event_labels">Till:</h6> <%= @event.end_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></td><br />
+    <td><h6 class="event_labels">Where:</h6> <%= @event.location %></td><br />
+    <td><h6 class="event_labels">Min Attendees:</h6> <%= @event.headcount_min %></td><br />
+    <td><h6 class="event_labels">Max Attendees:</h6> <%= @event.headcount_max %></td>
+  </tr>
+</div>
 
-<tr>
-  <td><%= @event.creator_id %><br /><!-- host's name -->
-  <td>What: <%= @event.name %></td><br />
-  <td><%= @event.description %></td><br />
-  <td>When: <%= @event.start_datetime.localtime %></td><br />
-  <td>Till: <%= @event.end_datetime.localtime %></td><br />
-  <td>Where: <%= @event.location %></td><br />
-  <td><%= @event.headcount_min %></td><br />
-  <td><%= @event.headcount_max %></td>
-</tr><br />
-
+<br />
 <!-- if admin - invite guests to event -->
 <!-- Who: populate invitees and confirmed guests' gravatars (attendees) -->
-
+<br />
 <!--  edit option available for admin only --><%= link_to 'Edit', edit_event_path(@event) %> &nbsp; | &nbsp;
 <!-- delete option available for admin only--><%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Really delete?' } %>&nbsp; | &nbsp;
 <%= link_to 'Home', events_path %>

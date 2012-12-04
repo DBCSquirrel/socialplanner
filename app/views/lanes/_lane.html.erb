@@ -1,8 +1,6 @@
 <div class="lane">
-
-
- <div class="user_info">
-    <img src="http://placehold.it/40x40">
+  <div class="user_info">
+    <img src="http://placehold.it/50x50">
     <!-- FB name and photo -->
   </div>
 
@@ -10,6 +8,6 @@
     <%= render :partial => 'event', :collection => @events %>
   </div><!--/timeline-->
 
- <a class="remove_sched" href="#">[x]</a>
+  <%= link_to image_tag('wood_bin.png'), url_for({:controller => 'controller_name', :action => 'action_name'}), :title=>"Remove Schedule?", :class => 'remove_sched', :remote => true %>
 
 </div>

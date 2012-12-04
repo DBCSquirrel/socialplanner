@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
 * {
   margin: 0;
   padding: 0;
@@ -44,7 +45,7 @@ body {
   border-right: 1px dotted;
   margin: 0 auto;
   color: #BF8130;
-  background-color: #FFFFFF; /*#FFC273;*/
+  background-color: #FFFFFF;
 }
 
 #auth {
@@ -59,63 +60,8 @@ body {
     font: 50px 'Mouse Memoirs', sans-serif;
     color: #BF8130;
     margin: 5px 0px;
-  /*background: yellow;*/
 }
 
-/*div.tabs ul li a:link { outline: 0; color: black; text-decoration: none; }
-div.tabs ul li a:active { outline: 0; text-decoration: none; }
-div.tabs ul li a:hover { outline: 0; text-decoration: none; color: red; }
-div.tabs ul li a:visited { outline: 0; text-decoration: none; color: black; }
-
-div.tabs {
-  float: left;
-  height: auto;
-  width: 55%;
-  margin-right: 8.6%;
-  margin-top: 1%;
-}
-div.tabs ul {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-
-* { margin: 0; padding: 0; }
-html { color: black; }
-
-div.header {}
-
-div.header h1 {
-    float: left;
-    padding: 0.59%;
-    margin-right: 1%;
-}
-
-div.nav { /* fb login/out link */
-    float: right;
-    width: auto;
-    margin: 1% 4%;
-}
-
-/*div.tabs ul li a:link { outline: 0; color: black; text-decoration: none; }
-div.tabs ul li a:active { outline: 0; text-decoration: none; }
-div.tabs ul li a:hover { outline: 0; text-decoration: none; color: red; }
-div.tabs ul li a:visited { outline: 0; text-decoration: none; color: black; }
-
-div.tabs {
-<<<<<<< HEAD
-    float: left;
-    height: auto;
-    width: 55%;
-    /*margin-right: 8.6%;*/
-    margin-top: 1%;
-=======
-    float: left;
-    height: auto;
-    width: 55%;
-    margin-right: 8.6%;
-    margin-top: 1%;
->>>>>>> add static lane events and add lane
-}
 div.tabs ul {
     margin: 0;
     padding: 0;
@@ -135,56 +81,3 @@ div.tabs ul li.current {
     background-color: #f9f9f9;
     font-size: bold;
 }
-
-div.day {
-<<<<<<< HEAD
-    width: auto;
-    background-color: yellow;
-    height: 5%;
-    /*clear: both;*/
-}
-
-div.main_grid {
-    height: 100%;
-    width: 120%;
-    /*margin: auto;*/
-    float: left;
-    /*border: 1px solid;*/
-    /*border-radius: 5px 5px 5px 5px;*/
-    padding: 20px;
-    clear: both;
-=======
-    width: auto;
-    background-color: yellow;
-    height: 5%;
-
-}
-
-div.main_grid {
-    height: 100%;
-    width: 120%;
-
-    float: left;
-
-
-    padding: 20px;
-    clear: both;
->>>>>>> add static lane events and add lane
-}
-
-div.main_grid td {
-    padding: 12px;
-    border-radius: 5px 5px 5px 5px;
-    border: 1px solid #eee;
-}
-
-div.main_grid table#roster a:link { color: black; text-decoration: none; }
-div.main_grid table#roster a:active { text-decoration: none; }
-div.main_grid table#roster a:hover { color: red; }
-div.main_grid table#roster a:visited { text-decoration: none; color: black; }
-
-.zebra {
-    background-color: #ddd;
-    color: #666;
-}
-*/
