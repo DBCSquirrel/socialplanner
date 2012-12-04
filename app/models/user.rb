@@ -56,16 +56,17 @@ class User < ActiveRecord::Base
   end
 
   def facebook
+    logger.info "got into facebook method"
     @facebook ||= Koala::Facebook::API.new(oauth_token)
+    create_friendships(@facebook)
   end
 
-  def create_friendships
-
-    friends_list = thefacebook_object.get_connections("me", "friends")
+  def create_friendships(facebook)
+    friends_list = facebook.get_connections("me", "friends")
     friends_list.each do |fb_friend|
-      if squirrly_friend = User.find_by_uid(fb_friend.id)
-        Friendship.create(:user_id => squirrly_friend.id, :friend_id => fb_friend.id)
-        Friendship.create(:user_id => fb_friend.id, :friend_id => squirrly_friend.id)
+      if squirrly_friend = User.find_by_uid(fb_friend["id"])
+        Friendship.create(:user_id => squirrly_friend.id, :friend_id => fb_friend["id"])
+        Friendship.create(:user_id => fb_friend["id"], :friend_id => squirrly_friend.id)
       end
     end
   end

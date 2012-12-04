@@ -1,5 +1,5 @@
 class Friendship < ActiveRecord::Base
-  attr_accessible :friend_id
+  attr_accessible :friend_id, :user_id
   validates :friend_id, :presence => true, :numericality => true
   validates :user_id, :presence => true, :numericality => true
 
