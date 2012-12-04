@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
+    user.create_friendships if User.joins(:friendships).where('friendships.user_id' => user.id).count <= 0
     redirect_to root_url
   end
 

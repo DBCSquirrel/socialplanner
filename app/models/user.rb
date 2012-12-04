@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :guest_invitations, :through => :event_users, :source => :event
 
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friends, :through => :friendships\
 
   def invitations
     guest_invitations.joins(:event_users).where("event_users.accepted" => false)
@@ -58,15 +58,15 @@ class User < ActiveRecord::Base
   def facebook
     logger.info "got into facebook method"
     @facebook ||= Koala::Facebook::API.new(oauth_token)
-    create_friendships(@facebook)
   end
 
-  def create_friendships(facebook)
-    friends_list = facebook.get_connections("me", "friends")
+  def create_friendships
+    facebook
+    friends_list = @facebook.get_connections("me", "friends")
     friends_list.each do |fb_friend|
       if squirrly_friend = User.find_by_uid(fb_friend["id"])
-        Friendship.create(:user_id => squirrly_friend.id, :friend_id => fb_friend["id"])
-        Friendship.create(:user_id => fb_friend["id"], :friend_id => squirrly_friend.id)
+        Friendship.create(:user_id => self.id, :friend_id => squirrly_friend.id)
+        Friendship.create(:user_id => squirrly_friend.id, :friend_id => self.id)
       end
     end
   end
