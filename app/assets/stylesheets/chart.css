@@ -52,11 +52,21 @@ a {
   filter: alpha(opacity=70); /* for IE 8 and earlier */
 }
 
+#event_details {
+  font: 14px Verdana;
+
+}
 .event_text {
   font: 14px verdana;
   text-align: left;
   line-height: 25px;
   padding: 0px 5px;
+}
+
+.event_labels {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
 }
 
 .remove_sched {
