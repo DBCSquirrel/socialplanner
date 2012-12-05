@@ -1,18 +1,34 @@
-<% if @event.errors.any? %>
-  <ul>
-    <% @event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div id="events_form">
+  <div id="form_header"><h4>Create New Event</h4></div>
+  <% if @event.errors.any? %>
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= form_for(@event)  do |f| %><br />
-  <%= f.text_field :name, :placeholder => "Title" %><br />
-  <%= f.text_field :description, :placeholder => "Description" %><br />
-  <%= f.datetime_select :start_datetime %><br />
-  <%= f.datetime_select :end_datetime %><br />
-  <%= f.text_field :location, :placeholder => "Location" %><br />
-  <%= f.number_field :headcount_min, :placeholder => "Headcount minimum" %><br />
-  <%= f.number_field :headcount_max, :placeholder => "Headcount maximum" %><br />
-  <%= f.submit %><br />
-<% end %>
+  <%= form_for(@event)  do |f| %>
+    <%= f.text_field :name, :placeholder => "Name:" %><br />
+    <%= f.text_area :description, :placeholder => "Details:" %><br />
+    <%= f.text_field :location, :placeholder => "Where:" %><br />
+
+    <div id="options">
+
+    <ul id="options">
+      <li><%= f.label  'From' %></li>
+      <li><%= f.datetime_select :start_datetime %></li>
+      <li><%= f.label  'To' %></li>
+      <li><%= f.datetime_select :end_datetime %></li>
+    </ul><br /><br />
+
+      <%= f.number_field :headcount_min, :placeholder => "Headcount minimum" %><br />
+      <%= f.number_field :headcount_max, :placeholder => "Headcount maximum" %><br />
+    </div>
+
+    <div id="form_footer">
+      <%= f.submit %>
+      <%= link_to 'Cancel', events_path %>
+    </div>
+  <% end %>
+</div>
