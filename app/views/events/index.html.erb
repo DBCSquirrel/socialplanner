@@ -2,6 +2,23 @@
 &nbsp;  &nbsp;<%= link_to("Add Event", new_event_path) %>
 <div id="chart">
 
+
   <%= render 'lanes/lane' %>
 
+<div id="foobar">
 </div>
+</div>
+
+<form>
+<script type="text/javascript">
+$(document).on('fbInit', function() {
+  Facebook.getFriendsData(function(response) {
+    console.log(response.data);
+    for(var i = 0;i < response.data.length;i++) {
+      $('#foobar').append(Facebook.createFriendCheckbox(response.data[i]));
+    }
+  });
+});
+</script>
+<input type="button" value="submit">
+</form>
