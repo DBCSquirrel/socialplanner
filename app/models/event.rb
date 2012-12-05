@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   has_many :event_users, :dependent => :destroy
   has_many :guests, :through => :event_users, :source => :user
   has_many :comments, :as => :commentable
+  has_many :acceptable_invites
 
   def invited_guests
     guests.joins(:event_users).where("event_users.accepted" => false)
