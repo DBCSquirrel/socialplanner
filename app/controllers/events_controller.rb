@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     @event.update_attributes params[:event]
     if @event.save
-      redirect_to events_path
+      redirect_to event_path
     else
       render 'edit'
     end
