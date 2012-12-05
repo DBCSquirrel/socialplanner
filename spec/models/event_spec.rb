@@ -79,12 +79,15 @@ describe Event do
   describe '#accepted_guests' do
     it "returns a list of guests who have accepted the invitation" do
       event.save!
+
       user1 = create(:user)
       user2 = create(:user)
-      event.guests << user1
-      event.guests << user2
-      event.event_users.find_by_user_id(user1.id).update_attributes(:accepted => true)
-      event.accepted_guests.should == [user1]
+
+      event.accepted_guests  << user1
+      event.invited_guests << user2
+
+      event.accepted_guests.should include user1
+      event.accepted_guests.should_not include user2
     end
   end
 
