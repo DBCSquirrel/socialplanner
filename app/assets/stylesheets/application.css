@@ -45,7 +45,6 @@ body {
   border-right: 1px dotted;
   margin: 0 auto;
   color: #BF8130;
-  background-color: #FFFFFF;
 }
 
 #auth {
@@ -80,4 +79,102 @@ div.tabs ul li {
 div.tabs ul li.current {
     background-color: #f9f9f9;
     font-size: bold;
+}
+
+/*  ------------------FORM STYLING ----------------- */
+
+div#events_form {
+  text-align: center;
+  margin-top: 40px;
+  margin: auto;
+  border: 8px solid #666;
+  border-radius: 5px;
+  width: 50%;
+  height: auto;
+  /*background: yellow;*/
+  clear: both;
+}
+
+form#new_event {
+  padding: 5px;
+}
+
+form#new_event input {
+  padding: 5px;
+}
+
+form#new_event input[type=text]{
+  width: 400px;
+  height: 20px;
+}
+
+form#new_event textarea{
+  margin-top: 5px;
+  padding: 5px;
+  height: 25px;
+  width: 402px;
+}
+
+div#form_header {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #2f4779;
+  border-bottom: none !important;
+  background: #4e69a2;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size: 13px;
+  color: white;
+}
+
+div#events_form #options {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 28px;
+  color: #666;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size: 13px;  
+  font-weight: bolder;
+
+}
+
+div#events_form #options input {
+  width: 140px;
+}
+
+div#events_form #options ul {
+  list-style: none;
+  display: inline-block;
+}
+
+form#new_event input[type=submit] {
+ color: white;
+ background: #397ca8;
+ border: 1px solid #666;
+ padding: 5px 10px;
+}
+
+div#form_footer {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid #999;
+  background: #f9f9f9;
+}
+
+div#form_footer td{
+  margin-left: 0px;
+  padding: 5px;
+  height: 20px;
+}
+
+div#form_footer a {
+  width: 10px;
+  height: 10px;
+  color: #666;
+  border: 1px solid #999;
+  background: #e1e1e1;
+  padding: 5px 10px;
+}
+
+div#form_header h4 {
+  padding: 5px;
 }
