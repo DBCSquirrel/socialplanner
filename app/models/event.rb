@@ -1,10 +1,20 @@
 class Event < ActiveRecord::Base
+  after_initialize :set_default_headcount_min
+
   attr_accessible :id, :created_at, :updated_at, :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :private
+
   validates :name, :presence => true
-  validates :creator_id, :presence => true
+  validates :creator, :presence => true
 
   validates :start_datetime, :presence => true
   validates :end_datetime, :presence => true
+
+  validates :headcount_min,
+            :numericality => {:only_integer => true, :greater_than => 0}
+
+  validates :headcount_max, 
+            :numericality => {:greater_than_or_equal_to => :headcount_min, :only_integer => true},
+            :allow_nil => true
 
   belongs_to :creator, :class_name => "User"
 
@@ -40,6 +50,10 @@ class Event < ActiveRecord::Base
   end
 
   private
+  def set_default_headcount_min
+    self.headcount_min ||= 1
+  end
+
   def add_creator_to_event
     self.accepted_guests << self.creator
   end
