@@ -1,7 +1,9 @@
 class Event < ActiveRecord::Base
   after_initialize :set_default_headcount_min
 
-  attr_accessible :id, :created_at, :updated_at, :name, :description, :creator_id, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :private
+  attr_accessible :id, :created_at, :updated_at, :name, :description,
+                  :creator_id, :start_datetime, :end_datetime, :location,
+                  :headcount_min, :headcount_max, :private, :invitee_ids
 
   validates :name, :presence => true
   validates :creator, :presence => true
