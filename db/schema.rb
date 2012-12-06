@@ -14,12 +14,14 @@
 ActiveRecord::Schema.define(:version => 20121205202830) do
 
   create_table "acceptable_invites", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "fb_id"
+    t.integer  "event_id",                      :null => false
+    t.integer  "fb_id",                         :null => false
     t.boolean  "invited",    :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  add_index "acceptable_invites", ["event_id", "fb_id"], :name => "index_acceptable_invites_on_event_id_and_fb_id", :unique => true
 
   create_table "comments", :force => true do |t|
     t.string   "body"
