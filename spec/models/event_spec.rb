@@ -4,14 +4,12 @@ describe Event do
   let(:event) { build(:event) }
   let(:user) { build(:user) }
   context "#initialization" do
-
-    [:name, :description, :start_datetime, :end_datetime, :location, :headcount_min, :headcount_max, :creator_id].each do |attribute|
-      it {should respond_to attribute}
-    end
-    it { should validate_presence_of(:name) }
     it { should belong_to(:creator) }
     it { should have_many(:event_users).dependent(:destroy) }
     it { should have_many(:guests).through(:event_users) }
+    it { should have_many(:invited_guests).through(:event_users) }
+    it { should have_many(:accepted_guests).through(:event_users) }
+
     it { should have_many(:comments) }
     it { should have_db_column(:private).of_type(:boolean).with_options(:default => false) }
 
@@ -28,20 +26,19 @@ describe Event do
         event.errors.full_messages.should include("Creator can't be blank")
       end
 
-      it "should have an start date and time" do
-        event.start_datetime = ''
-        event.save.should be_false
-        event.errors.full_messages.should include("Start datetime can't be blank")
-      end
-
-      it "should have an end date and time" do
-        event.end_datetime = ''
-        event.save.should be_false
-        event.errors.full_messages.should include("End datetime can't be blank")
-      end
     end
-
   end
+
+  context "#valid?" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:creator) }
+    it { should validate_presence_of(:start_datetime) }
+    it { should validate_presence_of(:end_datetime) }
+    it { should validate_numericality_of(:headcount_min).only_integer }
+    it { should validate_numericality_of(:headcount_max).only_integer }
+  end
+
+
   context "adding guests to event" do
     it "should initially have an association with guests" do
       event.should respond_to(:guests)
@@ -79,12 +76,15 @@ describe Event do
   describe '#accepted_guests' do
     it "returns a list of guests who have accepted the invitation" do
       event.save!
+
       user1 = create(:user)
       user2 = create(:user)
-      event.guests << user1
-      event.guests << user2
-      event.event_users.find_by_user_id(user1.id).update_attributes(:accepted => true)
-      event.accepted_guests.should == [user1]
+
+      event.accepted_guests  << user1
+      event.invited_guests << user2
+
+      event.accepted_guests.should include user1
+      event.accepted_guests.should_not include user2
     end
   end
 

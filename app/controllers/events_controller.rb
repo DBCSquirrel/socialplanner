@@ -8,9 +8,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
+    @event = current_user.created_events.new(params[:event])
+
     if @event.save
-      @event_user = @event.event_users.create(:user_id => @event.creator_id, :accepted => true)
       redirect_to events_path
     else
       render 'new'
