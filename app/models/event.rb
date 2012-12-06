@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :creator, :presence => true
-  # validates :fb_id, :presence => true
+  # validates :fb_id, :presence => true #DELETE THIS WHEN MERGING
 
   validates :start_datetime, :presence => true
   validates :end_datetime, :presence => true
@@ -72,6 +72,7 @@ class Event < ActiveRecord::Base
     end
     @tracking
   end
+  
   
   def to_facebook_params
     facebook_params = {
