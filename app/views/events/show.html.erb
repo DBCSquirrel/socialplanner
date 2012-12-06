@@ -1,17 +1,17 @@
-<%= form_for(@event) do |f| %>
-  <%= f.submit %>
+  <%= form_for(@event) do |f| %>
+    <%= f.submit %>
+    <div id="facebook_ids">
+    <script type="text/javascript">
+      $(document).on('fbInit', function() {
+        Facebook.getFriendsData(function(response) {
+          console.log(response.data);
+          for(var i = 0;i < response.data.length;i++) {
+            $('#facebook_ids').append(Facebook.createFriendCheckbox(response.data[i]));
+          }
+        });
+      });
+    </script>
+    </div>
+  <% end %>
 
-  <div id="facebook_ids">
-  </div>
-<% end %>
 
-<script type="text/javascript">
-  $(document).on('fbInit', function() {
-    Facebook.getFriendsData(function(response) {
-      console.log(response.data);
-      for(var i = 0;i < response.data.length;i++) {
-        $('#facebook_ids').append(Facebook.createFriendCheckbox(response.data[i]));
-      }
-    });
-  });
-</script>
