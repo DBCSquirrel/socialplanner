@@ -10,5 +10,5 @@ end
 #OmniAuth.config.on_failure = SessionsController.action(:oauth_failure)
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, OMNI_SETTINGS['APP_ID'], OMNI_SETTINGS['APP_SECRET'], scope: "email, publish_stream"
+  provider :facebook, OMNI_SETTINGS['APP_ID'], OMNI_SETTINGS['APP_SECRET'], scope: "email, publish_stream, create_event"
 end

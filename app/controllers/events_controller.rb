@@ -6,11 +6,14 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
   end
-
+  
   def create
-    @event = current_user.created_events.new(params[:event])
-
-    if @event.save
+    @event = current_user.created_events.new(params[:event])    
+    
+    if @event.valid?
+      callback = current_user.facebook.put_object('me', 'events', @event.to_facebook_params )
+      @event.fb_id = callback["id"]
+      @event.save
       redirect_to @event
     else
       render 'new'

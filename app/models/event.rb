@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :creator, :presence => true
+  # validates :fb_id, :presence => true
 
   validates :start_datetime, :presence => true
   validates :end_datetime, :presence => true
@@ -54,14 +55,36 @@ class Event < ActiveRecord::Base
   end
 
   def active?
-    if self.headcount_min == nil || self.headcount_min <= self.headcount
+    if self.headcount_max < self.headcount
       true
     else
       false
     end
   end
+  
+  def self.tracking #events that are to be tracked by the background processes
+    @all_events = Event.all
+    @tracking = []
+    @all_events.each do |event|
+      if event.active?
+        @tracking << event
+      end
+    end
+    @tracking
+  end
+  
+  def to_facebook_params
+    facebook_params = {
+        :name => self.name,
+        :description => self.description,
+        :start_time => self.start_datetime,
+        :end_time => self.end_datetime,
+        :privacy_type => 'SECRET'
+    }
+  end
 
   private
+  
   def set_default_headcount_min
     self.headcount_min ||= 1
   end
