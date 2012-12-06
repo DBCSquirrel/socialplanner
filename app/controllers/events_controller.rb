@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find params[:id]
+    @event = Event.find(params[:id])
   end
 
   def show
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find params[:id]
+    @event = Event.find(params[:id])
 
     @event.attributes = params[:event]
 
