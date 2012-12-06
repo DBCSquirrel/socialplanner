@@ -1,25 +1,25 @@
 class AcceptableInvite < ActiveRecord::Base
-  attr_accessible :event_id, :fb_id, :invited
+  attr_accessible :event_id, :fb_id, :invited, :accepted, :maybe, :no
   belongs_to :event
 
-  def pending_batch
-    where(:invited => false)
+  def self.pending_batch
+    AcceptableInvite.where(:invited => false)
   end
 
-  def awaiting_reply
-    where(:invited => true, :maybe => false, :no => false, :accepted => false)
+  def self.awaiting_reply
+    AcceptableInvite.where(:invited => true, :maybe => false, :no => false, :accepted => false)
   end
 
-  def attending
-    where(:invited => true, :accepted => true)
+  def self.attending
+    AcceptableInvite.where(:invited => true, :accepted => true)
   end
 
-  def maybe_attending
-    where(:invited => true, :maybe => true)
+  def self.maybe_attending
+    AcceptableInvite.where(:invited => true, :maybe => true)
   end
 
-  def not_attending
-    where (:invited => true, :no => true)
+  def self.not_attending
+    AcceptableInvite.where (:invited => true, :no => true)
   end
 
   def invite
@@ -27,14 +27,14 @@ class AcceptableInvite < ActiveRecord::Base
   end
 
   def accepted
-    update_attributes(:invited => true, :accepted => :true, :maybe => false, :no => false)
+    update_attributes(:invited => true, :accepted => true, :maybe => false, :no => false)
   end
 
   def maybe
-    update_attributes(:invited => true, :accepted => :false, :maybe => true, :no => false)
+    update_attributes(:invited => true, :accepted => false, :maybe => true, :no => false)
   end
 
   def no
-    update_attributes(:invited => true, :accepted => :false, :maybe => false, :no => true)
+    update_attributes(:invited => true, :accepted => false, :maybe => false, :no => true)
   end
 end
