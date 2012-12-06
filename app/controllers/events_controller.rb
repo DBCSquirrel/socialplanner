@@ -6,10 +6,10 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
   end
-  
+
   def create
-    @event = current_user.created_events.new(params[:event])    
-    
+    @event = current_user.created_events.new(params[:event])
+
     if @event.valid?
       callback = current_user.facebook.put_object('me', 'events', @event.to_facebook_params )
       @event.fb_id = callback["id"]
@@ -24,8 +24,14 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
   end
 
-  def show
+ def show
     @event = Event.find(params[:id])
+
+    if @event.acceptable_invites.any?
+      render 'details' # table of friends
+    else
+      render 'show' # event status
+    end
   end
 
   def update
@@ -50,3 +56,4 @@ class EventsController < ApplicationController
   end
 
 end
+

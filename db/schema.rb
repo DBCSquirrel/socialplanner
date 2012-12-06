@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20121206043929) do
     t.integer  "headcount_max"
     t.integer  "creator_id"
     t.boolean  "private",        :default => false
-    t.integer  "fb_id"
+    t.integer  "fb_id",          :default => 0,     :null => false
   end
 
   create_table "friendships", :force => true do |t|
