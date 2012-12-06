@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206190328) do
+ActiveRecord::Schema.define(:version => 20121206202928) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id",                      :null => false
@@ -22,14 +22,6 @@ ActiveRecord::Schema.define(:version => 20121206190328) do
   end
 
   add_index "acceptable_invites", ["event_id", "fb_id"], :name => "index_acceptable_invites_on_event_id_and_fb_id", :unique => true
-
-  create_table "event_users", :force => true do |t|
-    t.integer  "event_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "accepted",   :default => false
-    t.integer  "fb_id"
-  end
 
   create_table "events", :force => true do |t|
     t.datetime "created_at",                        :null => false
@@ -44,13 +36,6 @@ ActiveRecord::Schema.define(:version => 20121206190328) do
     t.integer  "creator_id"
     t.boolean  "private",        :default => false
     t.integer  "fb_id"
-  end
-
-  create_table "friendships", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.integer  "friend_id"
   end
 
   create_table "users", :force => true do |t|
