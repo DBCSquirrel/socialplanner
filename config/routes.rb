@@ -2,14 +2,14 @@ Socialplanner::Application.routes.draw do
   root :to => 'events#new'
   resources :events
 
+  resources :users, :only => [:new]
+
   resources :lanes, :only => [:new, :destroy]
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'register', to: 'sessions#new', as: 'register'
   match 'signout', to: 'sessions#destroy', as: 'signout'
-
-  get 'users/new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

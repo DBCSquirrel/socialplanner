@@ -2,7 +2,10 @@
 
   <div id="wrapper"><!-- was page_overlay -->
     <div id="content"><!-- was page_content -->
-      <a href="http://localhost:3001/auth/facebook" class="fb-connect-button"></a>
+      <%= link_to '', '/auth/facebook', :class => 'fb-connect-button' %>
+      <%# This generates
+      <a href="/auth/facebook" class="fb-connect-button"></a>
+      %>
     </div>
   </div>
 
