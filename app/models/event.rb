@@ -41,6 +41,12 @@ class Event < ActiveRecord::Base
 
   after_create :add_creator_to_event
 
+  def invitee_ids=(invitee_ids)
+    self.acceptable_invites = invitee_ids.map do |invitee_id|
+      AcceptableInvite.new(:fb_id => invitee_id, :invited => false)
+    end
+  end
+
   def headcount
     accepted_guests.length
   end

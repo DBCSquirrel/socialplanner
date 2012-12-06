@@ -4,7 +4,9 @@
   <%= render 'lanes/lane' %>
 </div>
 
-<%= form_tag("/acceptable_submit", :method => "post") do %>
+<%= form_tag%>
+
+<%= form_tag("/acceptable_invites/create", :method => "post") do %>
 <div id="foobar">
 </div>
   <%= submit_tag("Submit") %>

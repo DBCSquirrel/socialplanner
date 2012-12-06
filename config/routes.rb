@@ -1,10 +1,9 @@
 Socialplanner::Application.routes.draw do
-  root :to => 'events#index'
+  root :to => 'events#new'
   resources :events
+
   resources :lanes, :only => [:new, :destroy]
 
-
-  match 'acceptable_submit', to: 'events#acceptable_submit'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
