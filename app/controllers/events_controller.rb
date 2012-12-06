@@ -21,8 +21,13 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
   end
 
-  def show
+ def show
     @event = Event.find(params[:id])
+    if @event.acceptable_invites.any?
+      render 'show' # event status
+    else
+      render 'details' # table of friends
+    end
   end
 
   def update
@@ -47,3 +52,4 @@ class EventsController < ApplicationController
   end
 
 end
+

@@ -1,0 +1,104 @@
+<body id="registration">
+
+  <div id="wrapper"><!-- was page_overlay -->
+    <div id="content"><!-- was page_content -->
+      <a href="http://localhost:3001/auth/facebook" class="fb-connect-button"></a>
+    </div>
+  </div>
+
+  <!-- The container for the description -->
+  <div id="site_slogan">
+
+    <span id="copy"></span><br/>
+    <a id="image_url"></a>
+  </div>
+
+  <!-- The container for the background-image -->
+  <img id="bg" style="display:none" />
+
+  <!-- The container for the grid on top of the background-image -->
+  <div id="bg_grid">
+  </div>
+
+</body>
+<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+  var images = new Array();
+  var copy = new Array();
+  var iPrev = -1;
+  var iRnd = -1;
+
+  images[0] = "http://canvasinabox.com/preview/7/47/47-7-preview_large.jpg";
+  images[1] = "http://canvasinabox.com/preview/7/48/48-7-preview_large.jpg";
+  images[2] = "http://canvasinabox.com/preview/7/46/46-7-preview_large.jpg";
+  images[3] = "http://canvasinabox.com/preview/18/133/133-18-preview_large.jpg";
+  images[4] = "http://canvasinabox.com/preview/27/174/174-27-preview_large.jpg";
+  images[5] = "http://canvasinabox.com/preview/27/173/173-27-preview_large.jpg";
+  images[6] = "http://canvasinabox.com/preview/5/25/25-5-preview_large.jpg";
+
+  copy[0] = "Turn your facebook friends into real friends.";
+  copy[1] = "Quickly create a Facebook event.";
+  copy[2] = "Get RSVP email notifications";
+  copy[3] = "Turn your facebook friends into real friends.";
+  copy[4] = "Auto-suggested best-matches for invites.";
+  copy[5] = "Turn your facebook friends into real friends.";
+  copy[6] = "Schedule brunch with your very best friends.";
+
+  $(document).ready(function() {
+
+    /* Define the function that triggers to fade in the background as soon as the image has loaded */
+    $("img#bg").load(function()
+      {
+        /* Fade in during 3 seconds */
+        $("img#bg").fadeTo(4000,1);
+
+        /* Animate the picture description during 1 second */
+        setTimeout(function() { $("#site_slogan").animate({left: '+=400'}, 100) }, 500);
+
+        /* Set the timeout to fade out the image and the description after 10 seconds*/
+          setTimeout(function()
+            {
+              $("#site_slogan").animate({left: '-=500'}, 100);
+              $("img#bg").fadeOut(4000);
+
+              /* Load the next image after 4 seconds */
+              setTimeout(LoadImages,4000);
+            }
+            ,5000);
+      }
+    )
+
+    /* Start the slideshow one second after the page is ready */
+    setTimeout(LoadImages,1000);
+
+    });
+
+    function LoadImage(iNr)
+  {
+
+    /* Assign the new image to the background */
+    $("img#bg").attr("src", images[iNr]);
+
+    /* Assign the artist name to the description */
+    $("#copy").html(copy[iNr]);
+
+    /* Assign the image url to the description */
+    };
+
+    function LoadImages()
+    {
+
+      /* Select a random image number and make sure this is not equal to the previous image */
+      while(iPrev == iRnd)
+      {
+        iRnd = Math.floor(Math.random()*images.length);
+      }
+
+      /* Show the selected image */
+      LoadImage(iRnd);
+
+      iPrev = iRnd;
+
+    };
+</script>

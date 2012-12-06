@@ -12,23 +12,15 @@
  *= require_tree .
  */
 
-* {
-  margin: 0;
-  padding: 0;
+/* native tags */
+a {
+ outline: 0;
+ text-decoration: none;
+ font: 12px verdana;
 }
 
-html {
-  color: black;
-  /*background: #e1e1e1;*/
-}
-
-div.header {
-  float: left;
-}
-
-div.nav { /* fb login/out link */
-  float: right;
-  width: auto;
+a:hover {
+  color: #0A64A4;
 }
 
 a:link, a:visited {
@@ -36,38 +28,64 @@ a:link, a:visited {
   text-decoration: none;
 }
 
-a:hover {
-  color: #0A64A4;
-}
-
 body {
   width: 960px;
-  border-right: 1px dotted;
   margin: 0 auto;
   color: #BF8130;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#event_details h6 {
+  font-size: 14px;
+  margin: 0;
+  display: inline;
+}
+
+/* header */
 #auth {
   float: right;
   padding: 10px;
   font: 14px verdana;
   text-align: right;
   text-decoration: none;
+  position: relative;
+  top: -60px;
 }
 
-#title {
+#header {
+  overflow: hidden;
+  width: 860px;
+  margin: 0 auto;
+}
+
+#header h1 {
     font: 50px 'Mouse Memoirs', sans-serif;
     color: #BF8130;
     margin: 5px 0px;
 }
 
-div.tabs ul {
+.nav { /* fb login/out link */
+  float: right;
+  width: auto;
+}
+
+#chart {
+  width: 840px; /* fills 100% of parent "body," width, 960px */
+  margin: 0 auto;
+  clear: both;
+}
+
+.tabs ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-div.tabs ul li {
+.tabs ul li {
     display: inline-block;
     margin-left: 0.1%;
     border: 1px solid #666;
@@ -76,27 +94,32 @@ div.tabs ul li {
     border-radius: 2px 2px 2px 2px;
 }
 
-div.tabs ul li.current {
+.tabs ul li.current {
     background-color: #f9f9f9;
     font-size: bold;
 }
 
-/*  ------------------FORM STYLING ----------------- */
+/*  ------FORM STYLING ----- */
 
-div#events_form {
-  text-align: center;
+#events_form {
   margin-top: 40px;
   margin: auto;
   border: 8px solid #666;
   border-radius: 5px;
   width: 50%;
   height: auto;
-  /*background: yellow;*/
+  font: 11px verdana;
   clear: both;
 }
 
-form#new_event {
+#new_event {
   padding: 5px;
+}
+
+#new_event .fields {
+  padding: 5px;
+  width: 414px;
+  margin: 0 auto;
 }
 
 form#new_event input {
@@ -109,14 +132,13 @@ form#new_event input[type=text]{
 }
 
 form#new_event textarea{
-  margin-top: 5px;
   padding: 5px;
-  height: 25px;
+  margin-bottom: 3px;
+  height: 30px;
   width: 402px;
 }
 
 div#form_header {
-  width: 100%;
   text-align: left;
   border: 1px solid #2f4779;
   border-bottom: none !important;
@@ -126,55 +148,211 @@ div#form_header {
   color: white;
 }
 
-div#events_form #options {
-  text-align: left;
-  margin-top: 10px;
-  margin-left: 28px;
+div#form_header h4 {
+  padding: 5px;
+}
+
+div.options {
+  margin-left: 6%;
   color: #666;
   font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
-  font-size: 13px;  
+  font-size: 13px;
   font-weight: bolder;
-
 }
 
-div#events_form #options input {
-  width: 140px;
+div.fields label {
+  color: #666;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size: 12px;
+  font-weight: bolder;
 }
 
-div#events_form #options ul {
+div#events_form input  {
+  margin-bottom: 5px;
+}
+
+div.options input {
+    width: 140px;
+  }
+
+div.fields ul#options {
+  margin: auto;
   list-style: none;
   display: inline-block;
-}
-
-form#new_event input[type=submit] {
- color: white;
- background: #397ca8;
- border: 1px solid #666;
- padding: 5px 10px;
 }
 
 div#form_footer {
   margin-top: 10px;
   padding-top: 5px;
   border-top: 1px solid #999;
-  background: #f9f9f9;
-}
-
-div#form_footer td{
-  margin-left: 0px;
-  padding: 5px;
-  height: 20px;
+  background: #eee;
 }
 
 div#form_footer a {
-  width: 10px;
-  height: 10px;
   color: #666;
-  border: 1px solid #999;
-  background: #e1e1e1;
-  padding: 5px 10px;
 }
 
-div#form_header h4 {
-  padding: 5px;
+div#form_footer td {
+  margin-left: 20px;
+  padding: 10px;
+}
+
+div#form_footer input[type=submit] {
+  color: white;
+  background: #5B74A8; /*#397ca8*/
+  border: 1px solid #666;
+  margin-left: 33px;
+  padding: 5px 10px;
+  font-weight: bolder;
+  font-family: verdana;
+}
+
+/*  --------------- END FORM STYLING --------------- */
+
+
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+
+
+/*  ------- INVITE-FRIENDS STYLING ----------------- */
+
+div#facebook_ids {
+  width: 70%;
+  clear: both;
+  margin: 10px auto;
+}
+
+form.edit_event {
+  clear: both;
+}
+
+form.edit_event input[type=submit] {
+  clear: both;
+  margin: 2% 44% 1%;
+    color: white;
+  background: #5B74A8; /*#397ca8*/
+  border: 1px solid #666;
+  padding: 5px 10px;
+  font-weight: bolder;
+  font-family: verdana;
+}
+
+div.user-card {
+  display: inline-block;
+  margin: 10px;
+  padding: 0px;
+}
+
+div.user-card input[type=checkbox] {
+  display: block;
+  margin: 3px auto;
+  text-align: center;
+}
+
+div.user-card img {
+  margin: 0 15px;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 7px;
+  -webkit-box-shadow: 0 5px 6px -6px black;
+     -moz-box-shadow: 0 5px 6px -6px black;
+          box-shadow: 0 5px 6px -6px black;
+}
+
+div.user-card img:hover, div.user-card img:focus {
+    border: 1px solid #5B74A8;
+    background: lightblue;
+  transform: rotate(2deg);
+  -webkit-transform: rotate(2deg);
+  -moz--transform: rotate(2deg);
+  transition: transform 0.1s ease-out;
+  -webkit-transition: -webkit-transform 0.1s ease-out;
+  -moz-transition: -moz-tranform: 0.1s ease-out;
+}
+
+span.user-name {
+  display: block;
+  text-align: center;
+  margin: 2px auto 5px;
+  font: 14px verdana;
+  font-weight: bolder;
+  color: #666;
+}
+
+
+
+/*  ------- END FRIENDS-INVITE STYLING ----------------- */
+
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+
+
+/*  ------- LANDING PAGE STYLING ----------------- */
+
+body#registration {
+
+}
+
+#wrapper {
+    width:100%;
+    z-index:2;
+}
+
+#content {
+  z-index:2;
+  position:relative;
+}
+
+a.fb-connect-button {
+  position: relative;
+  left: 40%;
+  top: 280px;
+  width:250px;
+  height:39px;
+  display:block;
+  border: 1px solid lightblue;
+  background:url(//d2pfkgwlxerb6y.cloudfront.net/assets/buttons/fb-connect-sprite-2d7e6947978e8491f4c78d54115d188c.png) no-repeat;
+  text-indent:-9999em;
+}
+
+a.fb-connect-button:active {
+  background-position-y:-36px;
+}
+
+img#bg {
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    z-index:0;
+}
+
+#bg_grid {
+  position:fixed;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background: url(grid.png) repeat;
+  z-index:1;
+}
+
+#site_slogan {
+  position:fixed;
+  top:90px;
+  left:-250px;
+  filter:alpha(opacity=80);
+  -moz-opacity:0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  z-index:0;
+  padding:5px;
+  font-size:20px;
+  line-height:12px;
+  color:#333;
 }

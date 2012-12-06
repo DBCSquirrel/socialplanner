@@ -6,7 +6,10 @@ Socialplanner::Application.routes.draw do
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
+  match 'register', to: 'sessions#new', as: 'register'
   match 'signout', to: 'sessions#destroy', as: 'signout'
+
+  get 'users/new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
