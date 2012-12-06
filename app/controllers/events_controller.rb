@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
   end
 
- def show
+  def show
     @event = Event.find(params[:id])
 
     if @event.acceptable_invites.any?
