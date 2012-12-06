@@ -14,11 +14,14 @@
 ActiveRecord::Schema.define(:version => 20121206205335) do
 
   create_table "acceptable_invites", :force => true do |t|
-    t.integer  "event_id",                      :null => false
-    t.integer  "fb_id",                         :null => false
+    t.integer  "event_id"
+    t.integer  "fb_id"
     t.boolean  "invited",    :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.boolean  "accepted",   :default => false
+    t.boolean  "maybe",      :default => false
+    t.boolean  "no",         :default => false
   end
 
   add_index "acceptable_invites", ["event_id", "fb_id"], :name => "index_acceptable_invites_on_event_id_and_fb_id", :unique => true
@@ -36,9 +39,6 @@ ActiveRecord::Schema.define(:version => 20121206205335) do
     t.integer  "creator_id"
     t.boolean  "private",        :default => false
     t.integer  "fb_id"
-    t.boolean  "accepted"
-    t.boolean  "maybe"
-    t.boolean  "no"
   end
 
   create_table "users", :force => true do |t|
