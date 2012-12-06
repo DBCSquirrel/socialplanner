@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20121206205335) do
 
   create_table "acceptable_invites", :force => true do |t|
-    t.integer  "event_id",                      :null => false
-    t.integer  "fb_id",                         :null => false
+    t.integer  "event_id"
+    t.integer  "fb_id"
     t.boolean  "invited",    :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
