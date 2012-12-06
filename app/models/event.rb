@@ -3,11 +3,12 @@ class Event < ActiveRecord::Base
 
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
-                  :headcount_min, :headcount_max, :private, :invitee_ids
+                  :headcount_min, :headcount_max, :private, :invitee_ids,
+                  :fb_id
 
   validates :name, :presence => true
   validates :creator, :presence => true
-  # validates :fb_id, :presence => true
+  # validates :fb_id, :presence => true #DELETE THIS WHEN MERGING
 
   validates :start_datetime, :presence => true
   validates :end_datetime, :presence => true
@@ -21,28 +22,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :creator, :class_name => "User"
 
-  has_many :event_users, :dependent => :destroy
-
-  has_many :comments, :as => :commentable
   has_many :acceptable_invites
-
-  has_many :guests,
-           :through => :event_users,
-           :source => :user
-
-  has_many :invited_guests,
-           :through => :event_users,
-           :source => :user,
-           :conditions => EventUser.invited.where_clauses
-
-  has_many :accepted_guests,
-           :through => :event_users,
-           :source => :user,
-           :conditions => EventUser.accepted.where_clauses
-
-  has_many :comments, :as => :commentable
-
-  after_create :add_creator_to_event
 
   def invitee_ids=(invitee_ids)
     self.acceptable_invites = invitee_ids.map do |invitee_id|
@@ -50,29 +30,34 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def headcount
-    accepted_guests.length
-  end
-
-  def active?
-    if self.headcount_max < self.headcount
+  def in_progress?
+    if self.acceptable_invites < self.headcount_max && self.start_datetime > Time.now
+     #hasn't reached max goal and still is in the future
       true
     else
       false
     end
   end
-  
-  def self.tracking #events that are to be tracked by the background processes
-    @all_events = Event.all
-    @tracking = []
-    @all_events.each do |event|
-      if event.active?
-        @tracking << event
+
+  def full?
+    if self.acceptable_invites.attending >= self.headcount_max
+      true
+    else
+      false
+    end
+  end
+
+  def self.tracked #events that are to be tracked by the background processes
+    all_events = Event.all #event has not yet taken place, and headcount max has not yet been met
+    tracking = []
+    all_events.each do |event|
+      if event.in_progress?
+        tracking << event
       end
     end
-    @tracking
+    tracking
   end
-  
+
   def to_facebook_params
     facebook_params = {
         :name => self.name,
@@ -84,13 +69,8 @@ class Event < ActiveRecord::Base
   end
 
   private
-  
+
   def set_default_headcount_min
     self.headcount_min ||= 1
   end
-
-  def add_creator_to_event
-    self.accepted_guests << self.creator
-  end
-
 end

@@ -30,6 +30,7 @@ group :development, :test do
   gem 'capybara'
   gem 'sqlite3'
   gem 'shoulda-matchers'
+  gem 'fakeweb'
 end
 
 gem 'omniauth-facebook', '1.4.0' # version 1.4.1 seems to break with the current version of the Facebook SDK

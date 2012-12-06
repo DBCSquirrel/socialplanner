@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  sequence(:uid) { |n| "555555555#{n}" }
+  sequence(:uid) { |n| "555535555#{n}" }
   factory :user do
     provider "facebook"
     uid { generate(:uid) }

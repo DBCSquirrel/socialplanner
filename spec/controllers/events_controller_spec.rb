@@ -5,7 +5,16 @@ describe EventsController do
   let(:event) { build(:event) }
 
   let(:valid_attributes) do
-    build(:event).attributes.delete_if { |k,v| k == 'id' || k == 'created_at' || k == 'updated_at' }
+    FactoryGirl.attributes_for(:event)
+  end
+
+  let(:current_user) { create(:user) }
+
+  before(:each) do
+    controller.stub(:current_user).and_return current_user
+    FakeWeb.register_uri :post,
+                         "https://graph.facebook.com/me/events",
+                         :body => '{"data":{"id":"12345"}}'
   end
 
   describe '#new' do
@@ -14,36 +23,28 @@ describe EventsController do
       assigns(:event).should_not be_nil
       assigns(:event).should be_an_instance_of(Event)
     end
-
   end
 
   describe '#index' do
 
     it "assigns to @events" do
-      event # create an event in the database
+      event
       get :index # send request to index action of controller
       assigns(:events).should_not be_nil
     end
-
   end
 
   describe '#create' do
 
     context "with valid parameters" do
       it "saves a new event to the database" do
-        expect do
+        expect {
           post :create, { :event => valid_attributes }
-        end.to change{ Event.count }.by(1)
+        }.to change(Event, :count).by(1)
       end
 
-      it "automatically includes the event creator as accepting their own invitation" do
-        post :create, { :event => valid_attributes }
-        Event.last.creator_id.should eq(EventUser.last.user_id)
-        EventUser.last.accepted.should be_true
-      end
-
-      it "redirects to the index page" do
-        post(:create, { :event => valid_attributes}).should redirect_to events_path
+      it "redirects to the event show page" do
+        post(:create, { :event => valid_attributes}).should redirect_to event_path(Event.last)
       end
     end
 
@@ -52,9 +53,9 @@ describe EventsController do
       it "does not save a new event to the database" do
         invalid_attributes = valid_attributes
         invalid_attributes[:name] = ""
-        expect do
+        expect {
           post :create, { :event => invalid_attributes }
-        end.to change{ Event.count }.by(0)
+        }.to_not change(Event, :count)
       end
 
       it "renders the #new page" do
@@ -66,12 +67,10 @@ describe EventsController do
   end
 
   describe "#edit" do
-    before do
-      @event = Event.create(valid_attributes)
-    end
-
     it "renders the edit form" do
-      get(:edit, { :id => @event.id}).should render_template('edit')
+      event.save!
+
+      get(:edit, { :id => event.id}).should render_template('edit')
     end
   end
 
@@ -106,9 +105,10 @@ describe EventsController do
 
     it "should remove a record from the database" do
       event.save!
-      expect do
+
+      expect {
         delete :destroy, { :id => event.id }
-      end.to change{ Event.count }.by(-1)
+      }.to change(Event, :count).by(-1)
     end
   end
 end

@@ -4,88 +4,17 @@ describe User do
   let(:user) { build(:user) }
   let(:event) { user.created_events.build }
 
-  it { should have_many(:event_users).dependent(:destroy) }
-  it { should have_many(:guest_invitations).through(:event_users) }
   it { should have_many(:created_events).dependent(:destroy) }
-  it { should have_many(:friendships) }
-  it { should have_many(:friends).through(:friendships) }
 
-  context "initialization" do
-    it "should have a name" do
-      user.name = ""
-      user.save.should be_false
-      user.errors.full_messages.should include("Name can't be blank")
-    end
+  context "#valid?" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:oauth_token) }
 
-    it "has an oauth_token" do
-      user.oauth_token = ""
-      user.save.should be_false
-      user.errors.full_messages.should include("Oauth token can't be blank")
-    end
+    it { should validate_presence_of(:uid) }
+    it { should validate_numericality_of(:uid) }
+    it { should validate_uniqueness_of(:uid) }
 
-    it "has a facebook uid" do
-      user.uid = ""
-      user.save.should be_false
-      user.errors.full_messages.should include("Uid can't be blank")
-    end
-
-    it "should have a numerical facebook uid" do
-      user.uid = "asdfasdfasd"
-      user.save.should be_false
-      user.errors.full_messages.should include("Uid is not a number")
-    end
-
-    it "has a unique facebook uid" do
-      user.uid = "555"
-      user2 = create(:user, :uid => "555")
-      user.save.should be_false
-      user.errors.full_messages.should include("Uid has already been taken")
-    end
-
-    it "has a provider called 'facebook'" do
-      user.provider = 'facebookish'
-      user.save.should be_false
-      user.errors.full_messages.should include("Provider is invalid")
-    end
-
+    it { should validate_format_of(:provider).with('facebook') }
+    it { should validate_format_of(:provider).not_with('twitter') }
   end
-
-  describe '#guest_invitations' do
-    it "returns a list of events the user has been invited to" do
-      user.save!
-      event = create(:event)
-      event.guests << user
-      user.guest_invitations.should == [event]
-    end
-
-    it "by default, guest has not accepted event invitation" do
-      user.save!
-      event = create(:event)
-      event.guests << user
-      not_yet_accepted = event.guests.joins(:event_users).where("event_users.accepted" => false)
-      not_yet_accepted.last.should eq(user)
-    end
-
-  end
-
-  describe '#pending_events' do
-    it "returns a list of PENDING events that user has accepted invitations to" do
-      user.save!
-      event = create(:event)
-      event.guests << user
-      event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
-      user.attending_events.last.should eq(event)
-    end
-  end
-
-  describe "#attending_events" do
-    it "returns a list of ACTIVE events that user has accepted invitations to" do
-      user.save!
-      event = create(:event)
-      event.guests << user
-      event.event_users.find_by_user_id(user.id).update_attributes(:accepted => true)
-      user.attending_events.last.should eq(event)
-    end
-  end
-
 end
