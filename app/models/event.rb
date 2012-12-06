@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :creator, :presence => true
+  # validates :fb_id, :presence => true
 
   validates :start_datetime, :presence => true
   validates :end_datetime, :presence => true
@@ -60,8 +61,19 @@ class Event < ActiveRecord::Base
       false
     end
   end
+  
+  def to_facebook_params
+    facebook_params = {
+        :name => self.name,
+        :description => self.description,
+        :start_time => self.start_datetime,
+        :end_time => self.end_datetime,
+        :privacy_type => 'SECRET'
+    }
+  end
 
   private
+  
   def set_default_headcount_min
     self.headcount_min ||= 1
   end
