@@ -60,6 +60,10 @@ class Event < ActiveRecord::Base
       false
     end
   end
+  
+  def self.tracking
+    Event.all
+  end
 
   private
   def set_default_headcount_min
