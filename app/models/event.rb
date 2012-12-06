@@ -54,15 +54,22 @@ class Event < ActiveRecord::Base
   end
 
   def active?
-    if self.headcount_min == nil || self.headcount_min <= self.headcount
+    if self.headcount_max < self.headcount
       true
     else
       false
     end
   end
   
-  def self.tracking
-    Event.all
+  def self.tracking #events that are to be tracked by the background processes
+    @all_events = Event.all
+    @tracking = []
+    @all_events.each do |event|
+      if event.active?
+        @tracking << event
+      end
+    end
+    @tracking
   end
 
   private

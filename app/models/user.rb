@@ -61,14 +61,4 @@ class User < ActiveRecord::Base
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
 
-  def create_friendships
-    facebook
-    friends_list = @facebook.get_connections("me", "friends")
-    friends_list.each do |fb_friend|
-      if squirrly_friend = User.find_by_uid(fb_friend["id"])
-        Friendship.create(:user_id => self.id, :friend_id => squirrly_friend.id)
-        Friendship.create(:user_id => squirrly_friend.id, :friend_id => self.id)
-      end
-    end
-  end
 end

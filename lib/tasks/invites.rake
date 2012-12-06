@@ -6,14 +6,15 @@ task :send_invites => :environment do
   #logic for check which events need to be tracked,
   #if event is now full, then remove event from Event.tracking list
   
-  events_tracking = Event.tracking
-  events_tracking.each do |event|
+  # events_tracking = Event.tracking
+  # events_tracking.each do |event|
     # creator = User.find(event.creator_id)
-    creator = User.find(1)
+    creator = User.find(5)
     graph = Koala::Facebook::GraphAPI.new(creator.oauth_token)
     # graph.get_connections(event.fb_id, 'attending')
-    graph.get_connections('449237031807443', 'attending')
-  end
+    callback = graph.get_connections('449237031807443', 'attending')
+    puts callback.inspect
+  # end
 
   #do facebook api call, grab events based on event_id, 
   # test event id is 449237031807443
