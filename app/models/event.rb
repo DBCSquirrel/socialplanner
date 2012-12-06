@@ -23,7 +23,6 @@ class Event < ActiveRecord::Base
 
   has_many :event_users, :dependent => :destroy
 
-  has_many :comments, :as => :commentable
   has_many :acceptable_invites
 
   has_many :guests,
@@ -40,8 +39,6 @@ class Event < ActiveRecord::Base
            :source => :user,
            :conditions => EventUser.accepted.where_clauses
 
-  has_many :comments, :as => :commentable
-
   after_create :add_creator_to_event
 
   def invitee_ids=(invitee_ids)
@@ -55,7 +52,7 @@ class Event < ActiveRecord::Base
   end
 
   def active?
-    if self.headcount_max < self.headcount
+    if self.headcount_max > self.headcount
       true
     else
       false
