@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206202928) do
+ActiveRecord::Schema.define(:version => 20121206205335) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id",                      :null => false
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(:version => 20121206202928) do
     t.integer  "creator_id"
     t.boolean  "private",        :default => false
     t.integer  "fb_id"
+    t.boolean  "accepted"
+    t.boolean  "maybe"
+    t.boolean  "no"
   end
 
   create_table "users", :force => true do |t|

@@ -30,12 +30,17 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def headcount
-    accepted_guests.length
+  def in_progress?
+    if self.acceptable_invites < self.headcount_max && self.start_datetime > Time.now
+     #hasn't reached max goal and still is in the future
+      true
+    else
+      false
+    end
   end
 
-  def active?
-    if self.headcount_max > self.headcount
+  def full?
+    if self.acceptable_invites.attending >= self.headcount_max
       true
     else
       false
@@ -43,16 +48,15 @@ class Event < ActiveRecord::Base
   end
 
   def self.tracked #events that are to be tracked by the background processes
-    @all_events = Event.all
-    @tracking = []
-    @all_events.each do |event|
-      if event.active?
-        @tracking << event
+    all_events = Event.all #event has not yet taken place, and headcount max has not yet been met
+    tracking = []
+    all_events.each do |event|
+      if event.in_progress?
+        tracking << event
       end
     end
-    @tracking
+    tracking
   end
-
 
   def to_facebook_params
     facebook_params = {
