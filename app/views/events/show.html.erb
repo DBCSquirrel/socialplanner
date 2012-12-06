@@ -1,23 +1,17 @@
-<!-- this will be converted into a js file and rendered on-screen via ajax -->
+<%= form_for(@event) do |f| %>
+  <%= f.submit %>
 
-<div id="event_details">
-  <tr>
-    <td><h6 class="event_labels">What:</h6> <%= @event.name %></td><br />
-    <td><h6 class="event_labels">Description: </h6><%= @event.description %></td><br />
-    <td><h6 class="event_labels">When:</h6> <%= @event.start_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></td><br />
-    <td><h6 class="event_labels">Till:</h6> <%= @event.end_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></td><br />
-    <td><h6 class="event_labels">Where:</h6> <%= @event.location %></td><br />
-    <td><h6 class="event_labels">Min Attendees:</h6> <%= @event.headcount_min %></td><br />
-    <td><h6 class="event_labels">Max Attendees:</h6> <%= @event.headcount_max %></td>
-  </tr>
-</div>
+  <div id="facebook_ids">
+  </div>
+<% end %>
 
-<br />
-<!-- if admin - invite guests to event -->
-<!-- Who: populate invitees and confirmed guests' gravatars (attendees) -->
-<br />
-<!--  edit option available for admin only --><%= link_to 'Edit', edit_event_path(@event) %> &nbsp; | &nbsp;
-<!-- delete option available for admin only--><%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Really delete?' } %>&nbsp; | &nbsp;
-<%= link_to 'Home', events_path %>
-
- <!-- render polymorphic comment thread here. -->
+<script type="text/javascript">
+  $(document).on('fbInit', function() {
+    Facebook.getFriendsData(function(response) {
+      console.log(response.data);
+      for(var i = 0;i < response.data.length;i++) {
+        $('#facebook_ids').append(Facebook.createFriendCheckbox(response.data[i]));
+      }
+    });
+  });
+</script>

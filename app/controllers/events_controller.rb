@@ -11,7 +11,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.new(params[:event])
 
     if @event.save
-      redirect_to events_path
+      redirect_to @event
     else
       render 'new'
     end
@@ -27,9 +27,11 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find params[:id]
-    @event.update_attributes params[:event]
+
+    @event.update_attributes(params[:event])
+
     if @event.save
-      redirect_to event_path
+      render :json => @event.acceptable_invites
     else
       render 'edit'
     end
