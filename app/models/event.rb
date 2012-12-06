@@ -61,8 +61,8 @@ class Event < ActiveRecord::Base
       false
     end
   end
-  
-  def self.tracking #events that are to be tracked by the background processes
+
+  def self.tracked #events that are to be tracked by the background processes
     @all_events = Event.all
     @tracking = []
     @all_events.each do |event|
@@ -72,8 +72,8 @@ class Event < ActiveRecord::Base
     end
     @tracking
   end
-  
-  
+
+
   def to_facebook_params
     facebook_params = {
         :name => self.name,
@@ -85,7 +85,7 @@ class Event < ActiveRecord::Base
   end
 
   private
-  
+
   def set_default_headcount_min
     self.headcount_min ||= 1
   end
