@@ -39,12 +39,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find params[:id]
 
-    @event.update_attributes(params[:event])
+    @event.attributes = params[:event]
 
     if @event.save
       render :json => @event.acceptable_invites
     else
-      render 'edit'
+      redirect_to @event
     end
   end
 
