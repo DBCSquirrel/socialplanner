@@ -19,7 +19,7 @@ class AcceptableInvite < ActiveRecord::Base
   end
 
   def self.not_attending
-    AcceptableInvite.where (:invited => true, :no => true)
+    AcceptableInvite.where(:invited => true, :no => true)
   end
 
   def invite
