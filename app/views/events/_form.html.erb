@@ -8,23 +8,25 @@
     </ul>
   <% end %>
 
-  <%= form_for(@event)  do |f| %>
-    <%= f.text_field :name, :placeholder => "Name:" %><br />
-    <%= f.text_area :description, :placeholder => "Details:" %><br />
-    <%= f.text_field :location, :placeholder => "Where:" %><br />
+  <div class="options">
+    <div class="fields">
+      <%= form_for(@event)  do |f| %>
+      <%= f.text_field :name, :placeholder => "Name:" %><br />
+      <%= f.text_area :description, :placeholder => "Details:" %><br />
+      <%= f.text_field :location, :placeholder => "Where:" %><br />
 
-    <div id="options">
+      <ul id="options">
+        <li><%= f.label  'From' %></li>
+        <li><%= f.datetime_select :start_datetime %></li>
+        <li><%= f.label  'To' %></li>
+        <li><%= f.datetime_select :end_datetime %></li>
+      </ul><br /><br />
 
-    <ul id="options">
-      <li><%= f.label  'From' %></li>
-      <li><%= f.datetime_select :start_datetime %></li>
-      <li><%= f.label  'To' %></li>
-      <li><%= f.datetime_select :end_datetime %></li>
-    </ul><br /><br />
+      <%= f.number_field :headcount_min, :placeholder => "Headcount min?" %><br />
+      <%= f.number_field :headcount_max, :placeholder => "Required: headcount max" %><br />
 
-      <%= f.number_field :headcount_min, :placeholder => "Headcount minimum" %><br />
-      <%= f.number_field :headcount_max, :placeholder => "Headcount maximum" %><br />
-    </div>
+    </div><!--/fields-->
+  </div><!--/options-->
 
     <div id="form_footer">
       <%= f.submit %>
