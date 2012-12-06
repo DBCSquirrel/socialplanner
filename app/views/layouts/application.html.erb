@@ -3,18 +3,46 @@
 <head>
   <link href='http://fonts.googleapis.com/css?family=Mouse+Memoirs' rel='stylesheet' type='text/css'>
   <title>Squirrly</title>
+  <script type="text/javascript">
+    var facebook_app_id = "<%= OMNI_SETTINGS['APP_ID'] %>";
+  </script>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <!-- "http://mbostock.github.com/d3/d3.v2.js", -->
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      // init the FB JS SDK
+      FB.init({
+        appId      : facebook_app_id, // App ID from the App Dashboard
+        status     : true, // check the login status upon init?
+        cookie     : true // set sessions cookies to allow your server to access the session?
+      });
+      // Additional initialization code such as adding Event Listeners goes here
+
+      FB.getLoginStatus(function() {
+        $(document).trigger('fbInit');
+      });
+    };
+
+    (function(d, debug){
+       var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+       ref.parentNode.insertBefore(js, ref);
+     }(document, /*debug*/ false));
+  </script>
   <div id="header">
     <h1 id="title">Squirrly</h1>
     <div id="auth">
         <% if current_user %>
            Welcome, <strong><%= current_user.name %></strong> &middot;
-          <%= link_to "Log out", signout_path %>
+          <%= link_to "Log out", signout_path %> &middot;
+          <%= link_to "Add Friends", '#', :id => 'invite_friends' %>
         <% else %>
           <%= link_to "Log in", "/auth/facebook" %>
         <% end %>
@@ -24,8 +52,6 @@
       <% end %>
     </div> <!-- # auth -->
   </div>   <!-- # header -->
-
-<%= yield %>
-
+  <%= yield %>
 </body>
 </html>
