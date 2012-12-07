@@ -208,12 +208,8 @@ div#form_footer input[type=submit] {
 }
 
 /*  --------------- END FORM STYLING --------------- */
-
-
 /* ------------------------------------------------- */
 /* ------------------------------------------------- */
-
-
 /*  ------- INVITE-FRIENDS STYLING ----------------- */
 
 div#facebook_ids {
@@ -298,7 +294,7 @@ div#content {
   z-index:2;
   background: url('glass.png') center;
   position:relative;
-  left: 35%;
+  left: 70%;
   top: 70px;
   width: 500px;
   height: 300px;
