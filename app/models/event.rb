@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
                   :headcount_min, :headcount_max, :private, :invitee_ids,
-                  :fb_id
+                  :fb_id, :invited
 
   validates :name, :presence => true
   validates :creator, :presence => true
@@ -30,12 +30,12 @@ class Event < ActiveRecord::Base
     # we never go back.  Save that shit for v2.
 
     self.acceptable_invites = invitee_ids.map do |invitee_id|
-      AcceptableInvite.new(:fb_id => invitee_id, :invited => false)
+      AcceptableInvite.new(:fb_id => invitee_id)
     end
   end
   
   def in_progress?
-    if self.acceptable_invites < self.headcount_max && self.start_datetime > Time.now
+    if self.acceptable_invites.attending < self.headcount_max && self.start_datetime > Time.now
      #hasn't reached max goal and still is in the future
       true
     else
@@ -52,7 +52,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.tracked #events that are to be tracked by the background processes
-    all_events = Event.all #event has not yet taken place, and headcount max has not yet been met
+    all_events = all #event has not yet taken place, and headcount max has not yet been met
     tracking = []
     all_events.each do |event|
       if event.in_progress?
