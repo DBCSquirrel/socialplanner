@@ -40,7 +40,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     @event.attributes = params[:event]
-
+    
     if @event.save
       render :json => @event.acceptable_invites
     else

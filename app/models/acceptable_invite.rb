@@ -2,7 +2,7 @@ class AcceptableInvite < ActiveRecord::Base
   attr_accessible :event_id, :fb_id, :state
   belongs_to :event
 
-  validate :state, :inclusion => {:in => %w(pending sent attending maybe declined)}
+  validate :state, :inclusion => {:in => %w(pending sent attending maybe declined expired)}
 
   before_create do
     self.state = 'pending'
@@ -32,6 +32,10 @@ class AcceptableInvite < ActiveRecord::Base
   def self.maybe
     with_state('maybe')
   end
+  
+  def self.expired
+    with_state('expired')
+  end
 
   def sent!
     update_attributes(:state => 'sent')
@@ -43,5 +47,13 @@ class AcceptableInvite < ActiveRecord::Base
 
   def declined!
     update_attributes(:state => 'declined')
+  end
+  
+  def expired!
+    update_attributes(:state => 'expired')
+  end
+  
+  def set_state(state)
+    update_attributes(:state => state)
   end
 end

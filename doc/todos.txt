@@ -1,26 +1,15 @@
-- Add status to events (pending, approved once headcount reached, no headcount required = default approved)
-- Invites (initial & for events)--> process
--Logic to only allow events past current time
--^validations in general (admin can only host one at once)
--min/max instead of just headcount (implications on event status)
--admin/event created automatically added to attendees list upon event creation
--ranking/suggestion algorithm
-
--we have established the need for not only an attendees list, but the list of people invited
-
-Viewing event logic:
--only see an event that you have been invited to AND are friends with (controller logic)
-
-
-
-Finish events testing..
-  -event should respond_to event.alias(es)
-  -events_invitations
-  -events_users
-  -event.user.confirmed_at
-
-Migrations
-
-
-
--setup headcount min and max to allow a null value in database, set business logic to enforce minimum or maximum headcount ONLY if there is a min or max headcount present
+TODO
+States an event can be in:
+in_progress, completed (full?)
+States an invite can be in:
+									/---> yes
+pending ---> sent ---> maybe
+									\---> no
+instead of having 5 boolean fields,
+have a single "state" field that is a string
+which can be one of
+pending/sent/yes/maybe/no
+An invite can be in one and only one state at a time, so modeling it as multiple boolean fields doesn't make sense. What does it mean for pending to be true and sent to be true?
+1. Status page
+2. Rake task to send out batches of invites
+3. Scheduler to run rake task

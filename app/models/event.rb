@@ -25,11 +25,15 @@ class Event < ActiveRecord::Base
   has_many :acceptable_invites
 
   def invitee_ids=(invitee_ids)
+    # If we ever need to append rather than re-assign the invites
+    # this will be a problem.  But for now, once we choose who to invite
+    # we never go back.  Save that shit for v2.
+
     self.acceptable_invites = invitee_ids.map do |invitee_id|
       AcceptableInvite.new(:fb_id => invitee_id, :invited => false)
     end
   end
-
+  
   def in_progress?
     if self.acceptable_invites < self.headcount_max && self.start_datetime > Time.now
      #hasn't reached max goal and still is in the future
