@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Glegoo|Mouse+Memoirs' rel='stylesheet' type='text/css'>
+  <title>Squirrly</title>
+  <script type="text/javascript">
+    var facebook_app_id = "<%= OMNI_SETTINGS['APP_ID'] %>";
+  </script>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <!-- "http://mbostock.github.com/d3/d3.v2.js", -->
+    <%= csrf_meta_tags %>
+
+</head>
+  <body>
+    <div id="fb-root"></div>
+    <%= yield %>
+  </body>
+</html>

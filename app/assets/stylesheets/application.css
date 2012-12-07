@@ -283,38 +283,42 @@ span.user-name {
   color: #666;
 }
 
-
-
-/*  ------- END FRIENDS-INVITE STYLING ----------------- */
-
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-
-
+/*  ------- END FRIENDS-INVITE STYLING ----------- */
+/* ----------------------------------------------- */
 /*  ------- LANDING PAGE STYLING ----------------- */
 
-body#registration {
+body#registration {}
 
-}
-
-#wrapper {
+div#wrapper {
     width:100%;
     z-index:2;
 }
 
-#content {
+div#content {
   z-index:2;
+  background: url('glass.png') center;
   position:relative;
+  left: 35%;
+  top: 70px;
+  width: 500px;
+  height: 300px;
+  border-radius: 4px;
+  padding: 5px 1px;
+  text-align: center;
+  font: 16px 'Glegoo';
+}
+
+div#content h1 {
+  font: 50px 'Mouse Memoirs', sans-serif;
 }
 
 a.fb-connect-button {
+  margin: auto;
   position: relative;
-  left: 40%;
-  top: 280px;
+  top: 120px;
   width:250px;
   height:39px;
   display:block;
-  border: 1px solid lightblue;
   background:url(//d2pfkgwlxerb6y.cloudfront.net/assets/buttons/fb-connect-sprite-2d7e6947978e8491f4c78d54115d188c.png) no-repeat;
   text-indent:-9999em;
 }
@@ -343,16 +347,13 @@ img#bg {
 }
 
 #site_slogan {
-  position:fixed;
-  top:90px;
-  left:-250px;
   filter:alpha(opacity=80);
   -moz-opacity:0.8;
   -khtml-opacity: 0.8;
   opacity: 0.8;
-  z-index:0;
-  padding:5px;
-  font-size:20px;
+  z-index:2;
+  font-size:24px;
   line-height:12px;
   color:#333;
 }
+

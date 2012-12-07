@@ -1,0 +1,15 @@
+TODO
+States an event can be in:
+in_progress, completed (full?)
+States an invite can be in:
+									/---> yes
+pending ---> sent ---> maybe
+									\---> no
+instead of having 5 boolean fields,
+have a single "state" field that is a string
+which can be one of
+pending/sent/yes/maybe/no
+An invite can be in one and only one state at a time, so modeling it as multiple boolean fields doesn't make sense. What does it mean for pending to be true and sent to be true?
+1. Status page
+2. Rake task to send out batches of invites
+3. Scheduler to run rake task
