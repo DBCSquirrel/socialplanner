@@ -24,30 +24,43 @@ FOR EACH in-progress event
 
 namespace :invites do
   task :send => :environment do
-    Event.tracked.each do |event|
+      Event.tracked.each do |event|
       fb = Koala::Facebook::GraphAPI.new(event.creator.oauth_token)
       #Pull events that are not expired
     
       attending = fb.get_connections(event.fb_id, 'attending')
+      puts attending.inspect
       attending.each do |invite|
-        invite.accept!
+        acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
+        if acceptable_invite
+          acceptable_invite.attending!
+        end
       end
 
       maybe = fb.get_connections(event.fb_id, 'maybe')
       maybe.each do |invite|
-        invite.maybe!
+        acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
+        if acceptable_invite
+          acceptable_invite.maybe!
+        end
       end
 
       declined = fb.get_connections(event.fb_id, 'declined')
       declined.each do |invite|
-        invite.declined!
+        acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
+        if acceptable_invite                  
+          acceptable_invite.declined!
+        end
       end
     
       noreply = fb.get_connections(event.fb_id, 'noreply')
       noreply.each do |invite|
-        created_time = AcceptableInvite.find_by_fb_id(invite.id).created_at
-        if (Time.now - created_time) > 180 #180 seconds for testing
-          invite.expired!
+        acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
+        if acceptable_invite        
+          created_time = AcceptableInvite.find_by_fb_id(invite["id"]).created_at
+          if (Time.now - created_time) > 180 #180 seconds for testing
+            acceptable_invite.expired!
+          end
         end
       end      
     
@@ -59,12 +72,13 @@ namespace :invites do
         spots_left.times do |i|
           i -= 1
           if person = event.acceptable_invites.pending[i]
-            fb.put_connections(event.fb_id, "invited", :users => [person.fb_id])
+            puts person.inspect
+            fb.put_connections(event.fb_id, "invited", :users => person.fb_id)
             person.sent!
           end
         end
       end  
 
-    end
+     end
   end
 end

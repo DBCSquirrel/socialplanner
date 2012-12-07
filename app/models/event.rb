@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  after_initialize :set_default_headcount_min
+  after_initialize :set_default_headcount_min, :set_default_headcount_max
 
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   end
   
   def in_progress?
-    if self.acceptable_invites.attending < self.headcount_max && self.start_datetime > Time.now
+    if (self.acceptable_invites.attending.count < self.headcount_max) && (self.start_datetime > Time.now)
      #hasn't reached max goal and still is in the future
       true
     else
@@ -52,7 +52,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.tracked #events that are to be tracked by the background processes
-    all_events = all #event has not yet taken place, and headcount max has not yet been met
+    all_events = Event.all
     tracking = []
     all_events.each do |event|
       if event.in_progress?
@@ -76,5 +76,9 @@ class Event < ActiveRecord::Base
 
   def set_default_headcount_min
     self.headcount_min ||= 1
+  end
+  
+  def set_default_headcount_max
+    self.headcount_max ||= 20
   end
 end
