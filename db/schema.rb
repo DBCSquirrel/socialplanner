@@ -11,20 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206205335) do
+ActiveRecord::Schema.define(:version => 20121206235645) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id"
     t.integer  "fb_id"
     t.boolean  "invited",    :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.boolean  "accepted",   :default => false
     t.boolean  "maybe",      :default => false
     t.boolean  "no",         :default => false
+    t.string   "state",      :default => "pending", :null => false
   end
 
   add_index "acceptable_invites", ["event_id", "fb_id"], :name => "index_acceptable_invites_on_event_id_and_fb_id", :unique => true
+  add_index "acceptable_invites", ["state"], :name => "index_acceptable_invites_on_state"
 
   create_table "events", :force => true do |t|
     t.datetime "created_at",                        :null => false
