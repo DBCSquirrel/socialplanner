@@ -1,50 +1,78 @@
-<div id="event_status">
-  <div id="event_friends">
-    <h3>Going</h3>
-    <div>
-        <p>
-        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-        ut neque.
-        </p>
-    </div>
-    <h3>Not Going</h3>
-    <div>
-        <p>
-        Sed non urna. Donec et ante. Phasellus eu ligula.
-        </p>
-    </div>
-    <h3>Invited</h3>
-    <div>
-        <p>
-        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-        </p>
-        <ul>
-            <li>List item one</li>
-            <li>List item two</li>
-        </ul>
-    </div>
-    <h3>Not Invited</h3>
-    <div>
-        <p>
-        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-        </p>
-        <p>
-        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-        </p>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Squirrly
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="details.css" type="text/css">
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.collapsible-group h3').on('click', function(e) {
+          e.preventDefault();
 
-  <ul id="event_details">
-    <li><h6>What:</h6> <%= @event.name %></li>
-    <li><h6>When:</h6> <%= @event.start_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></li>
-    <li><h6>Until:</h6> <%= @event.end_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></li>
-    <li><h6>Where:</h6> <%= @event.location %></li>
-    <li><h6>Attendees:</h6> <%= @event.headcount %></li>
-    <li><h6>Min Attendees:</h6> <%= @event.headcount_min %></li>
-    <li><h6>Max Attendees:</h6> <%= @event.headcount_max %></li>
-    <li><h6>Description: </h6> <%= @event.description %></li>
-    <li class="event_edit_links"><%= link_to 'Edit', edit_event_path(@event) %> |
-    <%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Really delete?' } %> |
-    <%= link_to 'Home', events_path %></li>
-  </ul>
-</div>
+          $(this).closest('.collapsible-group').
+                  find('.collapsible-content').
+                  slideToggle();
+        });
+
+        $('#event_friends').accordion();
+      });
+
+    </script>
+  </head>
+  <body>
+    <div id="event_status">
+      <div id="title">
+        Event Status
+      </div>
+      <div id="event_friends">
+        <h3>Going</h3>
+        <div>
+            <p>
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+            ut neque.
+            </p>
+        </div>
+        <h3>Not Going</h3>
+        <div>
+            <p>
+            Sed non urna. Donec et ante. Phasellus eu ligula.
+            </p>
+        </div>
+        <h3>Invited</h3>
+        <div>
+            <p>
+            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+            </p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+            </ul>
+        </div>
+        <h3>Not Invited</h3>
+        <div>
+            <p>
+            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+            </p>
+            <p>
+            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+            </p>
+        </div>
+      </div>
+
+      <ul id="event_details">
+        <li><h6>What:</h6> <%= @event.name %></li>
+        <li><h6>When:</h6> <%= @event.start_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></li>
+        <li><h6>Until:</h6> <%= @event.end_datetime.localtime.strftime('%l:%M%p on %d %b %Y') %></li>
+        <li><h6>Where:</h6> <%= @event.location %></li>
+        <li><h6>Attendees:</h6> <%= @event.headcount %></li>
+        <li><h6>Description: </h6> <%= @event.description %></li>
+        <li class="event_edit_links"><%= link_to 'Edit', edit_event_path(@event) %> |
+        <%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Really delete?' } %> |
+        <%= link_to 'Home', events_path %></li>
+      </ul>
+    </div> <!-- #event_status -->
+  </body>
+</html>

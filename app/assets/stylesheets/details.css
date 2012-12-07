@@ -1,0 +1,59 @@
+body {
+  font: 14px verdana;
+  background-color: #C9F76F;
+}
+#event_status {
+  width: 860px;
+  margin: 0 auto;
+  overflow: hidden;
+  clear: both;
+  border: 2px solid #333333;
+}
+
+#title {
+  margin: 0 auto;
+  font: 30px verdana;
+  background-color: #777777;
+  width: 100%;
+  text-align: center;
+}
+
+#event_friends {
+  width: 300px;
+  background-color: #679B00;
+  float: left;
+  margin-right: 260px;
+}
+
+#event_details {
+  font: 14px verdana;
+  list-style: none;
+  float: left;
+  width: 300px;
+  background-color: #86B32D;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.event_text {
+  font: 14px verdana;
+  text-align: left;
+  line-height: 25px;
+}
+
+.event_labels {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
+}
+
+.event_edit_links {
+  margin-top: 20px;
+}
+
+#event_details h6 {
+  font-size: 14px;
+  margin: 0;
+  display: inline;
+}
