@@ -49,7 +49,6 @@
 #event_details {
   font: 14px verdana;
   list-style: none;
-  float: right;
   width: 270px;
   margin-top: 80px;
 }
@@ -71,9 +70,7 @@
 }
 #event_friends {
   width: 300px;
-  float: left;
   margin-top: 40px;
-  border: 1px solid red;
 }
 
 #event_friends h3 {

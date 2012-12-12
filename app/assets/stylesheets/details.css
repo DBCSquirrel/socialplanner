@@ -20,7 +20,6 @@ body {
 
 #event_friends {
   width: 300px;
-  background-color: #679B00;
   float: left;
   margin-right: 260px;
 }
@@ -30,7 +29,6 @@ body {
   list-style: none;
   float: left;
   width: 300px;
-  background-color: #86B32D;
   margin: 0;
   padding: 0;
   overflow: hidden;

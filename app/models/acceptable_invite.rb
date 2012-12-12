@@ -32,7 +32,7 @@ class AcceptableInvite < ActiveRecord::Base
   def self.maybe
     with_state('maybe')
   end
-  
+
   def self.expired
     with_state('expired')
   end
@@ -48,11 +48,15 @@ class AcceptableInvite < ActiveRecord::Base
   def declined!
     update_attributes(:state => 'declined')
   end
-  
+
+  def maybe!
+    update_attributes(:state => 'maybe')
+  end
+
   def expired!
     update_attributes(:state => 'expired')
   end
-  
+
   def set_state(state)
     update_attributes(:state => state)
   end

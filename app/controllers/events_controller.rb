@@ -40,9 +40,22 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     @event.attributes = params[:event]
-    
+# ---- modified code from rake invites:send, need to process first batch
+    fb = Koala::Facebook::GraphAPI.new(@event.creator.oauth_token)
+    if @event.headcount_max > @event.acceptable_invites.attending.count
+      spots_left = @event.headcount_max - @event.acceptable_invites.attending.count
+
+      spots_left.times do |i|
+        i -= 1
+        if person = @event.acceptable_invites.pending[i]
+          fb.put_connections(@event.fb_id, "invited", :users => person.fb_id)
+          person.sent!
+        end
+      end
+    end
+#----------------
     if @event.save
-      render :json => @event.acceptable_invites
+      render 'details'
     else
       redirect_to @event
     end
