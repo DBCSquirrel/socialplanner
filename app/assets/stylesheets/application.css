@@ -29,8 +29,8 @@ a:link, a:visited {
 }
 
 body {
-  width: 960px;
-  margin: 0 auto;
+/*  width: 960px;
+  margin: 0 auto;*/
   color: #BF8130;
 }
 
@@ -283,19 +283,18 @@ span.user-name {
 /* ----------------------------------------------- */
 /*  ------- LANDING PAGE STYLING ----------------- */
 
-body#registration {}
-
 div#wrapper {
-    width:100%;
-    z-index:2;
+	position: relative;
+	margin-left: 200px;
+	margin-top: 50px;
 }
 
 div#content {
   z-index:2;
   background: url('glass.png') center;
-  position:relative;
-  left: 70%;
-  top: 70px;
+  position: absolute;
+  top: 90px;
+  left: 170px;
   width: 500px;
   height: 300px;
   border-radius: 4px;
@@ -324,12 +323,10 @@ a.fb-connect-button:active {
 }
 
 img#bg {
-    position:fixed;
-    top:0;
-    left:0;
-    height:100%;
-    width:100%;
-    z-index:0;
+	position: absolute;
+    height:600px;
+    width:850px;
+	z-index: 1;
 }
 
 #bg_grid {
@@ -339,7 +336,7 @@ img#bg {
   height:100%;
   width:100%;
   background: url(grid.png) repeat;
-  z-index:1;
+  z-index:0;
 }
 
 #site_slogan {
