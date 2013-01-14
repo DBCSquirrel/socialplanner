@@ -47,7 +47,6 @@ GEM
     diff-lcs (1.1.3)
     erubis (2.7.0)
     eventmachine (1.0.0)
-    excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.1.0)
@@ -62,14 +61,6 @@ GEM
       multipart-post (~> 1.1)
     ffi (1.3.1)
     hashie (1.2.0)
-    heroku (2.34.0)
-      heroku-api (~> 0.3.7)
-      launchy (>= 0.3.2)
-      netrc (~> 0.7.7)
-      rest-client (~> 1.6.1)
-      rubyzip
-    heroku-api (0.3.7)
-      excon (~> 0.16.10)
     hike (1.2.1)
     httpauth (0.2.0)
     i18n (0.6.1)
@@ -84,8 +75,6 @@ GEM
       addressable (~> 2.2)
       faraday (~> 0.8)
       multi_json (~> 1.3)
-    launchy (2.1.2)
-      addressable (~> 2.3)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -99,7 +88,6 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.5.0)
     multipart-post (1.1.5)
-    netrc (0.7.7)
     nokogiri (1.5.6)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -144,8 +132,6 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
@@ -209,7 +195,6 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   fakeweb
-  heroku
   jquery-rails
   koala
   omniauth-facebook (= 1.4.0)
