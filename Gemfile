@@ -4,9 +4,7 @@ gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'whenever'
 gem 'thin'
-gem 'simplecov'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -27,6 +25,8 @@ group :development do
 end
 
 group :development, :test do
+  gem 'simplecov'  
+  gem 'whenever'
   gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
