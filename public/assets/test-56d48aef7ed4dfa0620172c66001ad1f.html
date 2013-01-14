@@ -1,0 +1,11 @@
+<html>
+<h2>Remove Element</h2>
+<script>
+function removeElement(){
+var el = document.getElementById('id');
+var remElement = (el.parentNode).removeChild(el);
+}
+</script>
+<input type="button" value="Remove Div" onclick="removeElement();" /><br><br>
+<div id="id" style="background-color:lightBlue;width:90;height:20;border:1px solid black">Hello World</div>
+</html>
