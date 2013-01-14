@@ -4,8 +4,6 @@ gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
 gem 'whenever'
 gem 'thin'
 gem 'simplecov'
@@ -36,6 +34,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'shoulda-matchers'
   gem 'fakeweb'
+  gem 'sqlite3'
 end
 
 gem 'omniauth-facebook', '1.4.0' # version 1.4.1 seems to break with the current version of the Facebook SDK
