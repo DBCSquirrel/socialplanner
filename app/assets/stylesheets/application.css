@@ -107,6 +107,7 @@ html, body {
   border: 8px solid #666;
   border-radius: 5px;
   width: 50%;
+  min-width: 600px;
   height: auto;
   font: 11px verdana;
   clear: both;
