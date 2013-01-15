@@ -35,5 +35,5 @@ Socialplanner::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   # the below id and token are for DEVELOPMENT only. add new tokens to production.rb to launch.
-  ENV['APP_ID'], ENV['APP_SECRET'] = '447198892006621', '265ce0f01f3bb07fda0ae1641d0d7a0c'
+  ENV['APP_ID'], ENV['APP_SECRET'] = '115107378665351', 'ffc5b1ea712b9ea0ec06cd56fef4f071'
 end
