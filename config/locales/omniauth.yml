@@ -1,10 +1,10 @@
 test:
     APP_ID: "115107378665351"
-    APP_SECRET:  "ffc5b1ea712b9ea0ec06cd56fef4f071"
+    APP_SECRET:  "ea0c842202530ea6e9ba47bd6993ff8e"
 
 development:
     APP_ID: "115107378665351"
-    APP_SECRET:  "ffc5b1ea712b9ea0ec06cd56fef4f071"
+    APP_SECRET:  "ea0c842202530ea6e9ba47bd6993ff8e"
 
 production:
     APP_ID: "447198892006621"
