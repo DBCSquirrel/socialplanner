@@ -36,4 +36,7 @@ Socialplanner::Application.configure do
   config.assets.debug = true
   # the below id and token are for DEVELOPMENT only. add new tokens to production.rb to launch.
   ENV['APP_ID'], ENV['APP_SECRET'] = '115107378665351', 'ea0c842202530ea6e9ba47bd6993ff8e'
+  
+  #REMOVED SSL VERFICIATION
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE 
 end
