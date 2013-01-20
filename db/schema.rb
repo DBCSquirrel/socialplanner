@@ -15,13 +15,12 @@ ActiveRecord::Schema.define(:version => 20130115232843) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.string   "state",      :default => "pending", :null => false
-    t.integer  "fb_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.string   "state",                   :default => "pending", :null => false
+    t.integer  "fb_id",      :limit => 8
   end
 
-  add_index "acceptable_invites", ["event_id"], :name => "index_acceptable_invites_on_event_id_and_fb_id", :unique => true
   add_index "acceptable_invites", ["state"], :name => "index_acceptable_invites_on_state"
 
   create_table "events", :force => true do |t|
