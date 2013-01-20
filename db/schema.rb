@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115232843) do
+ActiveRecord::Schema.define(:version => 20130120012825) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20130115232843) do
   add_index "acceptable_invites", ["state"], :name => "index_acceptable_invites_on_state"
 
   create_table "events", :force => true do |t|
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "name"
     t.string   "description"
     t.datetime "start_datetime"
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(:version => 20130115232843) do
     t.integer  "headcount_min"
     t.integer  "headcount_max"
     t.integer  "creator_id"
-    t.boolean  "private",        :default => false
-    t.integer  "fb_id",          :default => 0,             :null => false
-    t.string   "state",          :default => "in_progress", :null => false
+    t.boolean  "private",                     :default => false
+    t.integer  "fb_id",          :limit => 8, :default => 0,             :null => false
+    t.string   "state",                       :default => "in_progress", :null => false
   end
 
   add_index "events", ["state"], :name => "index_events_on_state"
