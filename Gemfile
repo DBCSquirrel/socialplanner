@@ -16,9 +16,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 
 group :development do
   gem 'quiet_assets'
@@ -31,7 +29,6 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
   gem 'capybara'
-  gem 'sqlite3'
   gem 'shoulda-matchers'
   gem 'fakeweb'
   gem 'sqlite3'
