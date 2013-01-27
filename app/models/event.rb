@@ -8,10 +8,12 @@ class Event < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :creator, :presence => true
-  # validates :fb_id, :presence => true #DELETE THIS WHEN MERGING
 
   validates :start_datetime, :presence => true
+  validates_datetime :end_datetime, :after => :start_datetime, :after_message => "must be at least a half hour from start of event"
+  
   validates :end_datetime, :presence => true
+  validates_datetime :start_datetime, :after => lambda { 1.hour.from_now }, :after_message => "must be at least an hour from now"
 
   validates :headcount_min,
             :numericality => {:only_integer => true, :greater_than => 0}

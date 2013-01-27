@@ -17,6 +17,7 @@ group :assets do
 end
 
 gem 'pg'
+gem 'validates_timeliness', '~> 3.0'
 
 group :development do
   gem 'quiet_assets'
