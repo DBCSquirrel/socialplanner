@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
   validates :creator, :presence => true
 
   validates :start_datetime, :presence => true
-  validates_datetime :end_datetime, :after => :start_datetime, :after_message => "must be at least a half hour from start of event"
+  validates_datetime :end_datetime, :after => :start_datetime, :after_message => "must be set a time after event start time"
   
   validates :end_datetime, :presence => true
   validates_datetime :start_datetime, :after => lambda { 1.hour.from_now }, :after_message => "must be at least an hour from now"
