@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @events = current_user.created_events
   end
 
   def new
@@ -16,7 +16,7 @@ class EventsController < ApplicationController
       @event.fb_id = callback["id"]
       @event.save
 
-      redirect_to @event
+      render 'update'
     else
       render 'new'
     end

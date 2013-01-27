@@ -1,5 +1,5 @@
 Socialplanner::Application.routes.draw do
-  root :to => 'events#new'
+  root :to => 'events#index'
 
   resources :events
   resources :users, :only => [:new]
