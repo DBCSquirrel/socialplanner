@@ -12,8 +12,7 @@ describe Event do
     it { should validate_presence_of(:creator) }
     it { should validate_presence_of(:start_datetime) }
     it { should validate_presence_of(:end_datetime) }
-    it { should validate_numericality_of(:headcount_min).only_integer }
-    it { should validate_numericality_of(:headcount_max).only_integer }
+    it { should validate_numericality_of(:headcount).only_integer }
   end
 end
 

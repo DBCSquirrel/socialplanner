@@ -42,8 +42,8 @@ class EventsController < ApplicationController
     @event.attributes = params[:event]
 # ---- modified code from rake invites:send, need to process first batch
     fb = Koala::Facebook::GraphAPI.new(@event.creator.oauth_token)
-    if @event.headcount_max > @event.acceptable_invites.attending.count
-      spots_left = @event.headcount_max - @event.acceptable_invites.attending.count
+    if @event.headcount > @event.acceptable_invites.attending.count
+      spots_left = @event.headcount - @event.acceptable_invites.attending.count
 
       spots_left.times do |i|
         i -= 1

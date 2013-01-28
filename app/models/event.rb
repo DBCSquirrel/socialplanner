@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
-                  :headcount_min, :headcount_max, :private, :invitee_ids,
+                  :headcount, :private, :invitee_ids,
                   :fb_id, :invited
 
   validates :name, :presence => true
@@ -14,12 +14,7 @@ class Event < ActiveRecord::Base
   validates :end_datetime, :presence => true
   validates_datetime :start_datetime, :after => lambda { 1.hour.from_now }, :after_message => "must be at least an hour from now"
 
-  validates :headcount_min,
-            :numericality => {:only_integer => true, :greater_than => 0}
-
-  validates :headcount_max,
-            :numericality => {:greater_than_or_equal_to => :headcount_min, :only_integer => true},
-            :allow_nil => true
+  validates :headcount, :numericality => { :greater_than => 0, :only_integer => true }
 
   belongs_to :creator, :class_name => "User"
 
@@ -36,7 +31,7 @@ class Event < ActiveRecord::Base
   end
   
   def in_progress?
-    if (self.acceptable_invites.attending.count < self.headcount_max) && (self.start_datetime > Time.now)
+    if (self.acceptable_invites.attending.count < self.headcount) && (self.start_datetime > Time.now)
      #hasn't reached max goal and still is in the future
       true
     else
@@ -45,7 +40,7 @@ class Event < ActiveRecord::Base
   end
 
   def full?
-    if self.acceptable_invites.attending >= self.headcount_max
+    if self.acceptable_invites.attending >= self.headcount
       true
     else
       false

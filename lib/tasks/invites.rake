@@ -67,8 +67,8 @@ namespace :invites do
 
       event.reload
 
-      if event.headcount_max > event.acceptable_invites.attending.count
-        spots_left = event.headcount_max - event.acceptable_invites.attending.count
+      if event.headcount > event.acceptable_invites.attending.count
+        spots_left = event.headcount - event.acceptable_invites.attending.count
 
         spots_left.times do |i|
           i -= 1

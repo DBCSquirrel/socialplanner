@@ -21,9 +21,7 @@
         <li><%= f.label  'To' %></li>
         <li><%= f.datetime_select :end_datetime, :ampm => true, :minute_step => 15 %></li>
       </ul><br /><br />
-
-      <%= f.number_field :headcount_min, :placeholder => "Headcount min?" %><br />
-      <%= f.number_field :headcount_max, :placeholder => "Required: headcount max" %><br />
+      <%= f.number_field :headcount, :placeholder => "Headcount Goal" %><br />
 
     </div><!--/fields-->
   </div><!--/options-->
