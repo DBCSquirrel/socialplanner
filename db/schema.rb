@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20130128184751) do
     t.datetime "updated_at",                                     :null => false
     t.string   "state",                   :default => "pending", :null => false
     t.integer  "fb_id",      :limit => 8
-    t.string   "name"
   end
 
   add_index "acceptable_invites", ["state"], :name => "index_acceptable_invites_on_state"

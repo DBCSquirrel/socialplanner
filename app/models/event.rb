@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   validates_datetime :start_datetime, :after => lambda { 1.hour.from_now }, :after_message => "must be at least an hour from now"
 
   validates :headcount, :numericality => { :greater_than => 0, :only_integer => true }
-  validates :expired_time, :numericality => { :only_integer => true }, :default => 3600
+  validates :expired_time, :presence => true, :numericality => { :only_integer => true }
 
   belongs_to :creator, :class_name => "User"
 
