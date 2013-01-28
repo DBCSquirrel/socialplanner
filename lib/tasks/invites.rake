@@ -75,7 +75,7 @@ namespace :invites do
           if person = event.acceptable_invites.pending[i]
             puts person.inspect
             fb.put_connections(event.fb_id, "invited", :users => person.fb_id)
-            person.sent!
+            person.noreply!
           end
         end
       end

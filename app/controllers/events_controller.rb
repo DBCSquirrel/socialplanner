@@ -49,7 +49,7 @@ class EventsController < ApplicationController
         i -= 1
         if person = @event.acceptable_invites.pending[i]
           fb.put_connections(@event.fb_id, "invited", :users => person.fb_id)
-          person.sent!
+          person.noreply!
         end
       end
     end

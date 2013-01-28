@@ -41,7 +41,7 @@
     <h3>No Reply</h3>
     <div>
       <ul>
-        <% @event.acceptable_invites.sent.each do |invitee| %>
+        <% @event.acceptable_invites.noreply.each do |invitee| %>
           <li><%= invitee.fb_id %></li>
         <% end %>
       </ul>

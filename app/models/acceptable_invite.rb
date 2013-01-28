@@ -2,7 +2,7 @@ class AcceptableInvite < ActiveRecord::Base
   attr_accessible :event_id, :fb_id, :state
   belongs_to :event
 
-  validate :state, :inclusion => {:in => %w(pending sent attending maybe declined expired)}
+  validate :state, :inclusion => {:in => %w(pending noreply attending maybe declined expired)}
 
   before_create do
     self.state = 'pending'
@@ -16,8 +16,8 @@ class AcceptableInvite < ActiveRecord::Base
     with_state('pending')
   end
 
-  def self.sent
-    with_state('sent')
+  def self.noreply #sent out invite
+    with_state('noreply')
   end
 
   # Facebook calls the states attending, maybe, and declined
@@ -37,8 +37,8 @@ class AcceptableInvite < ActiveRecord::Base
     with_state('expired')
   end
 
-  def sent!
-    update_attributes(:state => 'sent')
+  def noreply!
+    update_attributes(:state => 'noreply')
   end
 
   def attending!

@@ -3,7 +3,7 @@ States an event can be in:
 in_progress, completed (full?)
 States an invite can be in:
 									/---> yes
-pending ---> sent ---> maybe
+pending ---> noreply ---> maybe
 									\---> no
 instead of having 5 boolean fields,
 have a single "state" field that is a string
