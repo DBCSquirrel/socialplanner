@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
                   :headcount, :private, :invitee_ids,
-                  :fb_id, :invited
+                  :fb_id, :invited, :expired_time
 
   validates :name, :presence => true
   validates :creator, :presence => true
