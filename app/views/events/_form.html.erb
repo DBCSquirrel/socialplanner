@@ -22,6 +22,7 @@
         <li><%= f.datetime_select :end_datetime, :ampm => true, :minute_step => 15 %></li>
       </ul><br /><br />
       <%= f.number_field :headcount, :placeholder => "Headcount Goal" %><br />
+      <%= f.number_field :expired_time, :placeholder => "Invite expirations (in seconds)" %>
 
     </div><!--/fields-->
   </div><!--/options-->
