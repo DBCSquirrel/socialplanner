@@ -59,7 +59,7 @@ namespace :invites do
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
         if acceptable_invite
           created_time = AcceptableInvite.find_by_fb_id(invite["id"]).created_at
-          if (Time.now - created_time) > 3600 #3600 seconds for testing
+          if (Time.now - created_time) > event.expired_time
             acceptable_invite.expired!
           end
         end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128093906) do
+ActiveRecord::Schema.define(:version => 20130128184751) do
 
   create_table "acceptable_invites", :force => true do |t|
     t.integer  "event_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20130128093906) do
     t.boolean  "private",                     :default => false
     t.integer  "fb_id",          :limit => 8, :default => 0,             :null => false
     t.string   "state",                       :default => "in_progress", :null => false
+    t.integer  "expired_time"
   end
 
   add_index "events", ["state"], :name => "index_events_on_state"
