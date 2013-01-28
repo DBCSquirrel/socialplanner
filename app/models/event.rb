@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-  after_initialize :set_default_headcount_min, :set_default_headcount_max
 
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
@@ -74,13 +73,4 @@ class Event < ActiveRecord::Base
     }
   end
 
-  private
-
-  def set_default_headcount_min
-    self.headcount_min ||= 1
-  end
-  
-  def set_default_headcount_max
-    self.headcount_max ||= 20
-  end
 end
