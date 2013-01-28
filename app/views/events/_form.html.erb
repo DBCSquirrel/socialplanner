@@ -17,9 +17,9 @@
 
       <ul id="options">
         <li><%= f.label  'From' %></li>
-        <li><%= f.datetime_select :start_datetime %></li>
+        <li><%= f.datetime_select :start_datetime, :ampm => true, :minute_step => 15 %></li>
         <li><%= f.label  'To' %></li>
-        <li><%= f.datetime_select :end_datetime %></li>
+        <li><%= f.datetime_select :end_datetime, :ampm => true, :minute_step => 15 %></li>
       </ul><br /><br />
 
       <%= f.number_field :headcount_min, :placeholder => "Headcount min?" %><br />
