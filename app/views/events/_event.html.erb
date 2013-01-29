@@ -1,5 +1,0 @@
-<div class="event" style="left:<%= event_start_position(event) %>px; width:<%= event_length(event)%>px;">
-  <p class="event_text" title="<%= event.name%>. Event length: <%= ((event.end_datetime - event.start_datetime) / 60).round(2) %> minutes. Description: <%= event.description%>">
-    <%= link_to event.name, event %>
-   </p>
-</div>
