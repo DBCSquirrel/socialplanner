@@ -65,6 +65,7 @@ class Event < ActiveRecord::Base
         :description => self.description,
         :start_time => self.start_datetime,
         :end_time => self.end_datetime,
+        :location => self.location,
         :privacy_type => 'SECRET'
     }
   end
