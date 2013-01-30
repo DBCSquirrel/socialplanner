@@ -37,12 +37,11 @@
      }(document, /*debug*/ false));
   </script>
   <div id="header">
-    <h1 id="title">Squirrly</h1>
+    <h1 id="title">Squirrely</h1>
     <div id="auth">
         <% if current_user %>
            Welcome, <strong><%= current_user.name %></strong> &middot;
-          <%= link_to "Log out", signout_path %> &middot;
-          <%= link_to "Add Friends", '#', :id => 'invite_friends' %>
+          <%= link_to "Log out", signout_path %>
         <% else %>
           <%= link_to "Log in", "/auth/facebook" %>
         <% end %>
