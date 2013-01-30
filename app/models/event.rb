@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :creator, :class_name => "User"
 
-  has_many :acceptable_invites
+  has_many :acceptable_invites, dependent: :destroy
 
   def invitee_ids=(invitee_ids)
     # If we ever need to append rather than re-assign the invites

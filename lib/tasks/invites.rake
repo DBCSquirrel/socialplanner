@@ -61,6 +61,7 @@ namespace :invites do
           created_time = AcceptableInvite.find_by_fb_id(invite["id"]).created_at
           if (Time.now - created_time) > event.expired_time
             acceptable_invite.expired!
+            #and we remove from FB guest list as well
           end
         end
       end

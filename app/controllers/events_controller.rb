@@ -63,7 +63,9 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find params[:id]
-    if @event.destroy
+    fb = Koala::Facebook::GraphAPI.new(@event.creator.oauth_token)
+    callback = fb.rest_call("events.cancel", { eid: @event.fb_id, cancel_message: "", callback: "" })    
+    if callback && @event.destroy
       redirect_to events_path
     else
       render(:text => 'Sorry, your event was not successfully deleted. Please try again.')

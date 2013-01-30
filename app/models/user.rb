@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    logger.info "got into facebook method"
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
 
