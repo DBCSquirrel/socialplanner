@@ -4,10 +4,14 @@ class UsersController < ApplicationController
 	def new
 		render 'new', :layout => 'registration'
 	end
+	
+	def edit
+	  @user = current_user
+  end
 
   def destroy
-    @user = User.find_by_id(params[:id])
+    @user = current_user
     @user.destroy
-    redirect_to root_path
+    redirect_to signout_path
   end
 end

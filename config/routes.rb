@@ -8,4 +8,6 @@ Socialplanner::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'register', to: 'sessions#new', as: 'register'
   match 'signout', to: 'sessions#destroy', as: 'signout'
+  match 'settings', to: 'users#edit', as: 'settings'
+  match 'delete_account', to: 'users#destroy', as: 'delete_account'
 end
