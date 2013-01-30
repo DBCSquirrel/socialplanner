@@ -42,7 +42,8 @@ namespace :invites do
       maybe.each do |invite|
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
         if acceptable_invite
-          acceptable_invite.maybe!
+          callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
+          acceptable_invite.maybe! if callback
         end
       end
 
@@ -50,7 +51,8 @@ namespace :invites do
       declined.each do |invite|
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
         if acceptable_invite
-          acceptable_invite.declined!
+          callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")          
+          acceptable_invite.declined! if callback
         end
       end
 
@@ -60,8 +62,8 @@ namespace :invites do
         if acceptable_invite
           created_time = AcceptableInvite.find_by_fb_id(invite["id"]).created_at
           if (Time.now - created_time) > event.expired_time
-            acceptable_invite.expired!
-            #and we remove from FB guest list as well
+            callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
+            acceptable_invite.expired! if callback
           end
         end
       end
