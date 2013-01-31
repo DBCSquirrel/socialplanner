@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
-                  :headcount, :private, :invitee_ids,
+                  :headcount, :private, :invitees_info,
                   :fb_id, :invited, :expired_time
 
   validates :name, :presence => true
@@ -21,13 +21,14 @@ class Event < ActiveRecord::Base
 
   has_many :acceptable_invites, dependent: :destroy
 
-  def invitee_ids=(invitee_ids)
+  def invitees_info=(invitees_info)
     # If we ever need to append rather than re-assign the invites
     # this will be a problem.  But for now, once we choose who to invite
     # we never go back.  Save that shit for v2.
 
-    self.acceptable_invites = invitee_ids.map do |invitee_id|
-      AcceptableInvite.new(:fb_id => invitee_id)
+    self.acceptable_invites = invitees_info.map do |invitee_info|
+      info = invitee_info.split(",")
+      AcceptableInvite.new(:fb_id => info.first, :name => info.last.strip)
     end
   end
   

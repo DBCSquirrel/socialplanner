@@ -1,5 +1,5 @@
 class AcceptableInvite < ActiveRecord::Base
-  attr_accessible :event_id, :fb_id, :state
+  attr_accessible :event_id, :fb_id, :state, :name
   belongs_to :event
 
   validate :state, :inclusion => {:in => %w(pending noreply attending maybe declined expired)}

@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     if @event.acceptable_invites.any?
       render 'details' # table of friends
     else
-      render 'show' # event status
+      render 'empty'
     end
   end
 
