@@ -26,12 +26,12 @@ namespace :invites do
   task :send => :environment do
       puts 'beginning task'
       Event.tracked.each do |event|
-      fb = Koala::Facebook::GraphAPI.new(event.creator.oauth_token)
-        puts "checking on event '#{event.name}"
+        fb = Koala::Facebook::GraphAPI.new(event.creator.oauth_token)
+        puts "checking on event '#{event.name}'"
 
-      attending = fb.get_connections(event.fb_id, 'attending')
-      puts attending.inspect
-      attending.each do |invite|
+        attending = fb.get_connections(event.fb_id, 'attending')
+        puts attending.inspect
+        attending.each do |invite|
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
         if acceptable_invite
           acceptable_invite.attending!
@@ -47,7 +47,7 @@ namespace :invites do
         if acceptable_invite
           callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
           acceptable_invite.maybe! if callback
-          puts "#{acceptable_invite.name} said maybe -- removed"
+          puts "#{acceptable_invite.name} said maybe -- removed" if callback
         end
       end
 
@@ -59,7 +59,7 @@ namespace :invites do
         if acceptable_invite
           callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")          
           acceptable_invite.declined! if callback
-          puts "#{acceptable_invite.name} declined -- removed"
+          puts "#{acceptable_invite.name} declined -- removed" if callback
         end
       end
       
@@ -73,7 +73,7 @@ namespace :invites do
           if (Time.now - created_time) > event.expired_time
             callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
             acceptable_invite.expired! if callback
-            puts "#{acceptable_invite.name} took to long to reply to event -- removed"
+            puts "#{acceptable_invite.name} took to long to reply to event -- removed" if callback
           end
         end
       end
@@ -88,7 +88,7 @@ namespace :invites do
           if person = event.acceptable_invites.pending[i]
             callback = fb.put_connections(event.fb_id, "invited", :users => person.fb_id)
             person.noreply! if callback
-            puts "#{acceptable_invite.name} is now invited to the event"
+            puts "#{acceptable_invite.name} is now invited to the event" if callback
           end
         end
       end
