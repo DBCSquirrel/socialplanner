@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-
+  before_save :convert_minutes_to_seconds
   attr_accessible :id, :created_at, :updated_at, :name, :description,
                   :creator_id, :start_datetime, :end_datetime, :location,
                   :headcount, :private, :invitees_info,
@@ -30,6 +30,10 @@ class Event < ActiveRecord::Base
       info = invitee_info.split(",")
       AcceptableInvite.new(:fb_id => info.first, :name => info.last.strip)
     end
+  end
+  
+  def convert_minutes_to_seconds
+    self.expired_time *= 60
   end
   
   def in_progress?

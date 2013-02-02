@@ -20,9 +20,9 @@
         <li><%= f.datetime_select :start_datetime, :ampm => true, :minute_step => 15 %></li>
         <li><%= f.label  'To' %></li>
         <li><%= f.datetime_select :end_datetime, :ampm => true, :minute_step => 15 %></li>
-      </ul><br /><br />
-      <%= f.number_field :headcount, :placeholder => "Headcount Goal" %><br />
-      <%= f.number_field :expired_time, :placeholder => "Invite expirations (in seconds)" %>
+        <li>Headcount Goal<%= f.number_field :headcount, :placeholder => "Headcount Goal" %></li>
+        <li>Invitations expire after <%= f.number_field :expired_time %> minutes</li>
+      </ul>
 
     </div><!--/fields-->
   </div><!--/options-->
