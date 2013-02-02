@@ -27,7 +27,7 @@ namespace :invites do
       puts 'beginning task'
       Event.tracked.each do |event|
       fb = Koala::Facebook::GraphAPI.new(event.creator.oauth_token)
-      #Pull events that are not expired
+        puts "checking on event '#{event.name}"
 
       attending = fb.get_connections(event.fb_id, 'attending')
       puts attending.inspect
@@ -35,8 +35,11 @@ namespace :invites do
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
         if acceptable_invite
           acceptable_invite.attending!
+          puts "#{acceptable_invite.name} now attending"
         end
       end
+
+      event.reload
 
       maybe = fb.get_connections(event.fb_id, 'maybe')
       maybe.each do |invite|
@@ -44,8 +47,11 @@ namespace :invites do
         if acceptable_invite
           callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
           acceptable_invite.maybe! if callback
+          puts "#{acceptable_invite.name} said maybe -- removed"
         end
       end
+
+      event.reload
 
       declined = fb.get_connections(event.fb_id, 'declined')
       declined.each do |invite|
@@ -53,9 +59,12 @@ namespace :invites do
         if acceptable_invite
           callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")          
           acceptable_invite.declined! if callback
+          puts "#{acceptable_invite.name} declined -- removed"
         end
       end
-
+      
+      event.reload
+      
       noreply = fb.get_connections(event.fb_id, 'noreply')
       noreply.each do |invite|
         acceptable_invite = event.acceptable_invites.find_by_fb_id(invite["id"])
@@ -64,6 +73,7 @@ namespace :invites do
           if (Time.now - created_time) > event.expired_time
             callback = fb.graph_call("/#{acceptable_invite.event.fb_id}/invited/#{acceptable_invite.fb_id}", {}, "DELETE")
             acceptable_invite.expired! if callback
+            puts "#{acceptable_invite.name} took to long to reply to event -- removed"
           end
         end
       end
@@ -76,9 +86,9 @@ namespace :invites do
         spots_left.times do |i|
           i -= 1
           if person = event.acceptable_invites.pending[i]
-            puts person.inspect
-            fb.put_connections(event.fb_id, "invited", :users => person.fb_id)
-            person.noreply!
+            callback = fb.put_connections(event.fb_id, "invited", :users => person.fb_id)
+            person.noreply! if callback
+            puts "#{acceptable_invite.name} is now invited to the event"
           end
         end
       end
